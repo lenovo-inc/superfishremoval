@@ -4,6 +4,10 @@ SuperFish was pre-installed on a limited group of Lenovo branded notebooks  begi
 
 This utility will completely analyze your system for this problem and remove the SuperFish application, associated registry entries, files and security certificates, if needed. 
 
+## Download
+  - [Download from Lenovo.com](http://download.lenovo.com/pccbbs/thinkvantage_en/metroapps/SuperFishRemovalTool/1.0.2.0/Lenovo.SuperFishRemovalTool.exe)
+
+
 ### Links
   - [Manual Removal Instructions](http://support.lenovo.com/us/en/product_security/superfish_uninstall)
   - [Lenovo Security Advisory](http://support.lenovo.com/us/en/product_security/superfish)
@@ -22,8 +26,14 @@ MPL 1.1
   - Removal of Root certificate within Firefox and Thunderbird certificate stores ("Superfish, Inc")
   - Removal of remaining registry items under HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\VisualDiscovery
   - Removal of remaining .ini and .log files
-        * %SystemRoot%\SysWOW64\VisualDiscovery.ini
-        * %SystemRoot%\SysWOW64\VisualDiscoveryOff.ini
-        * %SystemRoot%\System32\VisualDiscoveryOff.ini
-        * %TEMP%\VisualDiscoveryr.log
+   * %SystemRoot%\SysWOW64\VisualDiscovery.ini
+   * %SystemRoot%\SysWOW64\VisualDiscoveryOff.ini
+   * %SystemRoot%\System32\VisualDiscoveryOff.ini
+   * %TEMP%\VisualDiscoveryr.log
+
+This tool can be run from command line.  From an Admin CMD prompt and run the following:
+
+    start /w Lenovo.SuperFishRemovalTool.exe /silent
+
+This reports the same status as the GUI and returns a non-zero error level on failure.  
 
