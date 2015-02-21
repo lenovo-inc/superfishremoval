@@ -283,7 +283,7 @@ namespace SuperFishRemovalTool.Utilities
         {
             if (!String.IsNullOrWhiteSpace(displayname))
             {
-                return ((displayname.ToLower().Contains("superfish")));
+                return ((displayname.ToLowerInvariant().Contains("superfish")));
             }
 
             return false;

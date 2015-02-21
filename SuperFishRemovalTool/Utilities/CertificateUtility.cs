@@ -93,7 +93,7 @@ namespace SuperFishRemovalTool.Utilities
             string Issuer = cert.Issuer;
             string IssuerName = cert.IssuerName.Name;
             
-            return ( (Issuer.ToLower().Contains("superfish, inc")) || (IssuerName.ToLower().Contains("superfish, inc")) );
+            return ( (Issuer.ToLowerInvariant().Contains("superfish, inc")) || (IssuerName.ToLowerInvariant().Contains("superfish, inc")) );
         }
 
         private void CopyStream(System.IO.Stream input, System.IO.Stream output)
