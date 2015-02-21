@@ -8,22 +8,8 @@ namespace SuperFishRemovalTool.Utilities
 {
     class MozillaCertificateUtility : ISuperfishDetector
     {
-
-        public FixResult RemoveItem()
-        {
-            var result = new FixResult(Localizer.Get().DetectorNameMozilla);
-            try
-            {
-                result.DidExist = this.DoesExist();
-                result.WasRemoved = this.Remove();
-            }
-            catch (Exception ex)
-            {
-                result.DidFail = true;
-            }
-            return result;
-        }
-
+        public string UtilityName { get { return Localizer.Get().DetectorNameMozilla; } }
+        
         private bool FoundCertFirefox = false;
         private bool FoundCertThunderbird = false;
 

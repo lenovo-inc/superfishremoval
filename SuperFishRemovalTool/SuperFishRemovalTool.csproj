@@ -88,6 +88,7 @@
     <Compile Include="Utilities\MozillaCertificateUtility.cs" />
     <Compile Include="Utilities\RegistryUtility.cs" />
     <Compile Include="Utilities\ISuperfishDetector.cs" />
+    <Compile Include="Utilities\SuperfishDetectorExtension.cs" />
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>

@@ -50,7 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mocks\IsAMockException.cs" />
+    <Compile Include="Mocks\MockSuperfishDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestSuperfishDetectorExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SuperFishRemovalTool\SuperFishRemovalTool.csproj">
