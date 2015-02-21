@@ -8,7 +8,7 @@ This utility will completely analyze your system for this problem and remove the
   - [Download from Lenovo.com](http://download.lenovo.com/pccbbs/thinkvantage_en/metroapps/SuperFishRemovalTool/1.0.2.0/Lenovo.SuperFishRemovalTool.exe)
 
 
-### Links
+## Links
   - [Manual Removal Instructions](http://support.lenovo.com/us/en/product_security/superfish_uninstall)
   - [Lenovo Security Advisory](http://support.lenovo.com/us/en/product_security/superfish)
   - [Lenovo Statement](http://news.lenovo.com/article_display.cfm?article_id=1929)
@@ -37,3 +37,5 @@ This tool can be run from command line.  From an Admin CMD prompt and run the fo
 
 This reports the same status as the GUI and returns a non-zero error level on failure.  
 
+##### Network Security Services (NSS)
+[NSS](https://developer.mozilla.org/docs/Mozilla/Projects/NSS) is an open source library provided by [Mozilla](https://www.mozilla.org) that is necessary to remove the Superfish certificate from the Firefox and Thunderbird certificate store instances.  The NSS toolset is included in this project.
