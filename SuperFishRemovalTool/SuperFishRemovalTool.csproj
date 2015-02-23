@@ -108,9 +108,6 @@
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
-    <EmbeddedResource Include="NSS\freebl3.chk" />
-    <EmbeddedResource Include="NSS\nssdbm3.chk" />
-    <EmbeddedResource Include="NSS\softokn3.chk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -143,73 +140,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\trashcan.ico" />
-    <EmbeddedResource Include="NSS\addbuiltin.exe" />
-    <EmbeddedResource Include="NSS\atob.exe" />
-    <EmbeddedResource Include="NSS\baddbdir.exe" />
-    <EmbeddedResource Include="NSS\bltest.exe" />
-    <EmbeddedResource Include="NSS\btoa.exe" />
-    <EmbeddedResource Include="NSS\certcgi.exe" />
     <EmbeddedResource Include="NSS\certutil.exe" />
-    <EmbeddedResource Include="NSS\checkcert.exe" />
-    <EmbeddedResource Include="NSS\chktest.exe" />
-    <EmbeddedResource Include="NSS\cmsutil.exe" />
-    <EmbeddedResource Include="NSS\conflict.exe" />
-    <EmbeddedResource Include="NSS\crlutil.exe" />
-    <EmbeddedResource Include="NSS\crmftest.exe" />
-    <EmbeddedResource Include="NSS\dbtest.exe" />
-    <EmbeddedResource Include="NSS\derdump.exe" />
-    <EmbeddedResource Include="NSS\dertimetest.exe" />
-    <EmbeddedResource Include="NSS\digest.exe" />
-    <EmbeddedResource Include="NSS\encodeinttest.exe" />
-    <EmbeddedResource Include="NSS\example.exe" />
-    <EmbeddedResource Include="NSS\fipstest.exe" />
     <EmbeddedResource Include="NSS\freebl3.dll" />
-    <EmbeddedResource Include="NSS\httpserv.exe" />
     <EmbeddedResource Include="NSS\libnspr4.dll" />
     <EmbeddedResource Include="NSS\libplc4.dll" />
     <EmbeddedResource Include="NSS\libplds4.dll" />
-    <EmbeddedResource Include="NSS\listsuites.exe" />
-    <EmbeddedResource Include="NSS\makepqg.exe" />
-    <EmbeddedResource Include="NSS\mangle.exe" />
-    <EmbeddedResource Include="NSS\minigzip.exe" />
-    <EmbeddedResource Include="NSS\modutil.exe" />
-    <EmbeddedResource Include="NSS\multinit.exe" />
-    <EmbeddedResource Include="NSS\nonspr10.exe" />
     <EmbeddedResource Include="NSS\nss3.dll" />
     <EmbeddedResource Include="NSS\nssckbi.dll" />
     <EmbeddedResource Include="NSS\nssdbm3.dll" />
     <EmbeddedResource Include="NSS\nssutil3.dll" />
-    <EmbeddedResource Include="NSS\ocspclnt.exe" />
-    <EmbeddedResource Include="NSS\ocspresp.exe" />
-    <EmbeddedResource Include="NSS\oidcalc.exe" />
-    <EmbeddedResource Include="NSS\p7content.exe" />
-    <EmbeddedResource Include="NSS\p7env.exe" />
-    <EmbeddedResource Include="NSS\p7sign.exe" />
-    <EmbeddedResource Include="NSS\p7verify.exe" />
-    <EmbeddedResource Include="NSS\pk11mode.exe" />
-    <EmbeddedResource Include="NSS\pk12util.exe" />
-    <EmbeddedResource Include="NSS\pk1sign.exe" />
-    <EmbeddedResource Include="NSS\pkix-errcodes.exe" />
-    <EmbeddedResource Include="NSS\pp.exe" />
-    <EmbeddedResource Include="NSS\pwdecrypt.exe" />
-    <EmbeddedResource Include="NSS\remtest.exe" />
-    <EmbeddedResource Include="NSS\rsaperf.exe" />
-    <EmbeddedResource Include="NSS\sdrtest.exe" />
-    <EmbeddedResource Include="NSS\secmodtest.exe" />
-    <EmbeddedResource Include="NSS\selfserv.exe" />
-    <EmbeddedResource Include="NSS\shlibsign.exe" />
-    <EmbeddedResource Include="NSS\signtool.exe" />
-    <EmbeddedResource Include="NSS\signver.exe" />
     <EmbeddedResource Include="NSS\smime3.dll" />
     <EmbeddedResource Include="NSS\softokn3.dll" />
     <EmbeddedResource Include="NSS\sqlite3.dll" />
     <EmbeddedResource Include="NSS\ssl3.dll" />
-    <EmbeddedResource Include="NSS\ssltap.exe" />
-    <EmbeddedResource Include="NSS\strsclnt.exe" />
-    <EmbeddedResource Include="NSS\symkeyutil.exe" />
-    <EmbeddedResource Include="NSS\tstclnt.exe" />
-    <EmbeddedResource Include="NSS\vfychain.exe" />
-    <EmbeddedResource Include="NSS\vfyserv.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -317,7 +317,7 @@ namespace SuperFishRemovalTool
                                 }
                                 catch(Exception ex)
                                 {
-                                    Console.Write(ex.Message);
+                                    Logging.Logger.Log(Logging.LogSeverity.Error, ex.Message);
                                 }
                             }
                         }

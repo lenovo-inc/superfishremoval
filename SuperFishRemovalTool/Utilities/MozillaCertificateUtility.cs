@@ -113,7 +113,7 @@ namespace SuperFishRemovalTool.Utilities
 
             if (System.IO.Directory.Exists(FirefoxProfilesDir))
             {
-                Console.Write("  Mozilla profiles found, extracing tools...");
+                string logging = "  Mozilla profiles found, extracing tools...";
 
                 string TempExtractDir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval");
                 try
@@ -122,11 +122,11 @@ namespace SuperFishRemovalTool.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Console.Write("  Exception trying to extract Mozilla certutil - " + ex.ToString() + "  ");
+                    logging += "  Exception trying to extract Mozilla certutil - " + ex.ToString() + "  ";
                 }
                 finally
                 {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "done");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, logging + "done");
                 }
 
                 string certutilProgram = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval", "certutil.exe");
@@ -144,7 +144,7 @@ namespace SuperFishRemovalTool.Utilities
                         certutilArgs = "-L -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
                     }
 
-                    Console.Write("  Mozilla - Running: " + certutilProgram + " " + certutilArgs);
+                    logging = "  Mozilla - Running: " + certutilProgram + " " + certutilArgs;
 
                     int certutilResult = -1;
                     try
@@ -159,11 +159,11 @@ namespace SuperFishRemovalTool.Utilities
                     }
                     catch (Exception ex)
                     {
-                        Console.Write("  Exception - " + ex.ToString());
+                        logging += "  Exception - " + ex.ToString();
                     }
                     finally
                     {
-                        Logging.Logger.Log(Logging.LogSeverity.Information, "  Result = " + certutilResult);
+                        Logging.Logger.Log(Logging.LogSeverity.Information, logging + "  Result = " + certutilResult);
                     }
                 }
 
