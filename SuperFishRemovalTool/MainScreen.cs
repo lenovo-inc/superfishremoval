@@ -11,12 +11,30 @@ using SuperFishRemovalTool.Utilities;
 
 namespace SuperFishRemovalTool
 {
+    /// <summary>
+    /// Summary result of 'sum' of all operations performed
+    /// </summary>
     public enum OverallResult
     {
+        /// <summary>
+        /// Invalid state
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// No superfish items were found
+        /// </summary>
         NoItemsFound = 1,
+        /// <summary>
+        /// Superfish items were found, and all were removed
+        /// </summary>
         ItemsFoundAndRemoved = 2,
-        ItemsFoundButNotRemoed = 3,
+        /// <summary>
+        /// Superfish items were found, but not all were removed
+        /// </summary>
+        ItemsFoundButNotRemoved = 3,
+        /// <summary>
+        /// An unexpected error occured while trying to remove one or many items
+        /// </summary>
         Error = 4,
     }
 
@@ -41,7 +59,7 @@ namespace SuperFishRemovalTool
             try
             {
                 var stringTable = Localizer.Get();
-                this.IsWorking = false;
+                this.IsDoingWork = false;
                 this.Text = stringTable.UtilityName;
                 this.IntroLabel.Text = stringTable.UtilityAbout;
                 this.RemoveButton.BackColor = Constants.Colors.ButtonBackground;
@@ -84,19 +102,23 @@ namespace SuperFishRemovalTool
 
         }
 
-
-        private bool IsWorking
+        /// <summary>
+        /// When doing work, display the progress bar and disable buttons
+        /// </summary>
+        private bool IsDoingWork
         {
             get
             {
-                return true;
+                return _isDoingWork;
             }
             set
             {
-                bool isVisibleWhileWorking = value;
-                bool isNotVisibleWhileWorking = !value;
-                bool isEnabledWhileWorking = value;
-                bool isNotEnabledWhilewWorking = !value;
+                _isDoingWork = value;
+                // Helper variables to make the remainder more readable
+                bool isVisibleWhileWorking = _isDoingWork;
+                bool isNotVisibleWhileWorking = !_isDoingWork;
+                bool isEnabledWhileWorking = _isDoingWork;
+                bool isNotEnabledWhilewWorking = !_isDoingWork;
 
                 this.RemoveButton.BackColor = (value) ? Constants.Colors.DisabledBackgroundColor : Constants.Colors.ButtonBackground;
 
@@ -106,7 +128,12 @@ namespace SuperFishRemovalTool
                 this.RestartLaterButton.Enabled = isNotEnabledWhilewWorking;
             }
         }
+        private bool _isDoingWork;
 
+        /// <summary>
+        /// Update restart buttons visibility and ableness based on the overall result
+        /// </summary>
+        /// <param name="result"></param>
         private void UpdateRestartButtons(OverallResult result)
         {
             bool areButtonsEnabled = false;
@@ -121,7 +148,7 @@ namespace SuperFishRemovalTool
                 case OverallResult.ItemsFoundAndRemoved:
                     areButtonsEnabled = true;
                     break;
-                case OverallResult.ItemsFoundButNotRemoed:
+                case OverallResult.ItemsFoundButNotRemoved:
                     areButtonsEnabled = false;
                     break;
                 case OverallResult.Error:
@@ -137,6 +164,10 @@ namespace SuperFishRemovalTool
             this.RestartNowButton.Enabled = areButtonsEnabled;
         }
 
+        /// <summary>
+        /// Translate an overall result into what the end user will see as the result
+        /// </summary>
+        /// <param name="result"></param>
         private void UpdateOverallStatusLabel(OverallResult result)
         {
             var stringTable = Localizer.Get();
@@ -151,7 +182,7 @@ namespace SuperFishRemovalTool
                 case OverallResult.ItemsFoundAndRemoved:
                     newText = stringTable.OverallStatusAppRemoved;
                     break;
-                case OverallResult.ItemsFoundButNotRemoed:
+                case OverallResult.ItemsFoundButNotRemoved:
                     goto case OverallResult.Error;
                 case OverallResult.Error:
                     newText = stringTable.OverallStatusError;
@@ -162,7 +193,12 @@ namespace SuperFishRemovalTool
             this.OverallResultLabel.Text = newText;
         }
 
-        private bool UpdateLabelBasedOnResult(Utilities.FixResult result)
+        /// <summary>
+        /// Adds a line item into the results for a particular scan result
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private bool AddLabelBasedOnIndividualResult(Utilities.FixResult result)
         {
             bool error = false;
             try
@@ -196,7 +232,7 @@ namespace SuperFishRemovalTool
                 }
 
                 string completeText = String.Format("{0} - {1}", text, result.NameOfItem);
-                this.ResultsFlowPanel.Controls.Add(GenerageResultLabel(completeText));
+                this.ResultsFlowPanel.Controls.Add(GenerateResultLabel(completeText));
 
             }
             catch (Exception ex)
@@ -206,6 +242,9 @@ namespace SuperFishRemovalTool
             return error;
         }
 
+        /// <summary>
+        /// Displays the current version of the executable
+        /// </summary>
         private void UpdateVersionField()
         {
             try
@@ -220,8 +259,10 @@ namespace SuperFishRemovalTool
         }
         #endregion UI Toggles
 
-
-        private void RunRemoveAgents()
+        /// <summary>
+        /// Starts the process of running the removal agents
+        /// </summary>
+        private void StartRunningRemovalAgents()
         {
             try
             {
@@ -235,7 +276,7 @@ namespace SuperFishRemovalTool
                 this.ResultsFlowPanel.Controls.Clear();
                 this.MainProgressBar.Value = 0;
                 this.PrepareBlankState();
-                this.IsWorking = true;
+                this.IsDoingWork = true;
                 this.InitializeBackgroundWorker();
 
             }
@@ -269,10 +310,10 @@ namespace SuperFishRemovalTool
                                 try
                                 {
                                     double percentageComplete = ( (double)(agents.IndexOf(agent) + 1) / (double)agents.Count) * 100;
-                                    var removalResult = TryToExeuteRemoval(agent);
+                                    var removalResult = TryToExecuteRemoval(agent);
                                     bgWorker.ReportProgress(Convert.ToInt32(percentageComplete), removalResult);
                                     overallResult = CalculateSingleResult(removalResult);
-                                    System.Threading.Thread.Sleep(1000);
+                                    System.Threading.Thread.Sleep(1000); // Some of the agents perform very quickly.  Slow it down to show each step
                                 }
                                 catch(Exception ex)
                                 {
@@ -301,7 +342,7 @@ namespace SuperFishRemovalTool
                         var result = e.UserState as Utilities.FixResult;
                         if (result != null)
                         {
-                            this.UpdateLabelBasedOnResult(result);
+                            this.AddLabelBasedOnIndividualResult(result);
                         }
                         else
                         {
@@ -317,15 +358,17 @@ namespace SuperFishRemovalTool
             };
             backgroundWorker.RunWorkerCompleted += (sender, e) =>
             {
-                this.IsWorking = false;
+                this.IsDoingWork = false;
                 this.MainProgressBar.Value = 0;
             };
 
             backgroundWorker.RunWorkerAsync(); // Start!
         }
 
-
-        private void Shutdown()
+        /// <summary>
+        /// Restarts the user's device
+        /// </summary>
+        private void RestartDevice()
         {
             try
             {
@@ -342,7 +385,7 @@ namespace SuperFishRemovalTool
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             
-            RunRemoveAgents();
+            StartRunningRemovalAgents();
         }
 
 
@@ -350,7 +393,7 @@ namespace SuperFishRemovalTool
         {
             try
             {
-                Shutdown();
+                RestartDevice();
             }
             catch(Exception ex)
             {
@@ -414,7 +457,7 @@ namespace SuperFishRemovalTool
         }
 
 
-        private static Utilities.FixResult TryToExeuteRemoval(Utilities.ISuperfishDetector detector)
+        private static Utilities.FixResult TryToExecuteRemoval(Utilities.ISuperfishDetector detector)
         {
             Utilities.FixResult result = null;
             try
@@ -445,7 +488,12 @@ namespace SuperFishRemovalTool
             }
         }
 
-        private static Label GenerageResultLabel(string text)
+        /// <summary>
+        /// Creates a UI Label instance with the provided text
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private static Label GenerateResultLabel(string text)
         {
             return new Label()
             {
@@ -458,7 +506,11 @@ namespace SuperFishRemovalTool
         }
 
 
-
+        /// <summary>
+        /// Translates a single removal result into an overall result for displaying to the user
+        /// </summary>
+        /// <param name="fixResult"></param>
+        /// <returns></returns>
         private static OverallResult CalculateSingleResult(Utilities.FixResult fixResult)
         {
             OverallResult result = OverallResult.None;
@@ -470,7 +522,7 @@ namespace SuperFishRemovalTool
             {
                 if (fixResult.DidExist)
                 {
-                    result = fixResult.WasRemoved ? OverallResult.ItemsFoundAndRemoved : OverallResult.ItemsFoundButNotRemoed;
+                    result = fixResult.WasRemoved ? OverallResult.ItemsFoundAndRemoved : OverallResult.ItemsFoundButNotRemoved;
                 }
                 else
                 {
@@ -480,18 +532,24 @@ namespace SuperFishRemovalTool
             return result;
         }
 
+        /// <summary>
+        /// Prioritizes previous results with a current result to determine which one to keep
+        /// </summary>
+        /// <param name="previous"></param>
+        /// <param name="mostRecent"></param>
+        /// <returns></returns>
         private static OverallResult CalculateMergedResult(OverallResult previous, OverallResult mostRecent)
         {
-            var mostRelevent = previous;
+            var mostRelevant = previous;
             if (previous > mostRecent)
             {
-                mostRelevent = previous;
+                mostRelevant = previous;
             }
             else
             {
-                mostRelevent = mostRecent;
+                mostRelevant = mostRecent;
             }
-            return mostRelevent;
+            return mostRelevant;
 
         }
         #endregion Private Static methods

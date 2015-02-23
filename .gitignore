@@ -6,3 +6,6 @@ SuperFishRemovalTool/bin
 build/.vs
 test/SuperFishRemovalTool.Test/obj
 test/SuperFishRemovalTool.Test/bin
+*.svn
+*.zip
+build/*.cmd
