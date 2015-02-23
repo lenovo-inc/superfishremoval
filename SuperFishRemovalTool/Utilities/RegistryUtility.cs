@@ -11,20 +11,7 @@ namespace SuperFishRemovalTool.Utilities
         public const string REGISTRY_KEY_UNINSTALL = "SOFTWARE\\VisualDiscovery";
         public const string REGISTRY_KEY_UNINSTALL32 = "SOFTWARE\\Wow6432Node\\VisualDiscovery";
 
-        public FixResult RemoveItem()
-        {
-            var result = new FixResult(Localizer.Get().DetectorNameReg);
-            try
-            {
-                result.DidExist = this.DoesExist();
-                result.WasRemoved = this.Remove();
-            }
-            catch (Exception ex)
-            {
-                result.DidFail = true;
-            }
-            return result;
-        }
+        public string UtilityName { get { return Localizer.Get().DetectorNameReg; } }
 
         public bool DoesExist()
         {

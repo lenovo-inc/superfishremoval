@@ -16,21 +16,7 @@ namespace SuperFishRemovalTool.Utilities
         //public const string REGISTRY_KEY_DISPLAYICO = "DisplayIcon";
         //public const string REGISTRY_KEY_DISPLAYVER = "DisplayVersion";
 
-        public FixResult RemoveItem()
-        {
-            var result = new FixResult(Localizer.Get().DetectorNameApp);
-            try
-            {
-                result.DidExist = this.DoesExist();
-                result.WasRemoved = this.Remove();
-            }
-            catch (Exception ex)
-            {
-                result.DidFail = true;
-            }
-            return result;
-        }
-
+        public string UtilityName { get { return Localizer.Get().DetectorNameApp; } }
 
         public bool DoesExist()
         {
@@ -283,7 +269,7 @@ namespace SuperFishRemovalTool.Utilities
         {
             if (!String.IsNullOrWhiteSpace(displayname))
             {
-                return ((displayname.ToLower().Contains("superfish")));
+                return ((displayname.ToLowerInvariant().Contains("superfish")));
             }
 
             return false;

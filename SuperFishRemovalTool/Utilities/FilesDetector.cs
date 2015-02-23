@@ -5,20 +5,7 @@ namespace SuperFishRemovalTool.Utilities
 {
     class FilesDetector : ISuperfishDetector
     {
-        public FixResult RemoveItem()
-        {
-            var result = new FixResult(Localizer.Get().DetectorNameFile);
-            try
-            {
-                result.DidExist = this.DoesExist();
-                result.WasRemoved = this.Remove();
-            }
-            catch (Exception ex)
-            {
-                result.DidFail = true;
-            }
-            return result;
-        }
+        public string UtilityName { get { return Localizer.Get().DetectorNameFile; } }
 
         public bool DoesExist()
         {

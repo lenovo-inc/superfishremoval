@@ -4,20 +4,7 @@ namespace SuperFishRemovalTool.Utilities
 {
     internal class CertificateUtility : ISuperfishDetector
     {
-        public FixResult RemoveItem()
-        {
-            var result = new FixResult(Localizer.Get().DetectorNameCert);
-            try
-            {
-                result.DidExist = this.DoesExist();
-                result.WasRemoved = this.Remove();
-            }
-            catch(Exception ex)
-            {
-                result.DidFail = true;
-            }
-            return result;
-        }
+        public string UtilityName { get { return Localizer.Get().DetectorNameCert; } }
 
         public bool DoesExist()
         {
@@ -93,7 +80,7 @@ namespace SuperFishRemovalTool.Utilities
             string Issuer = cert.Issuer;
             string IssuerName = cert.IssuerName.Name;
             
-            return ( (Issuer.ToLower().Contains("superfish, inc")) || (IssuerName.ToLower().Contains("superfish, inc")) );
+            return ( (Issuer.ToLowerInvariant().Contains("superfish, inc")) || (IssuerName.ToLowerInvariant().Contains("superfish, inc")) );
         }
 
         private void CopyStream(System.IO.Stream input, System.IO.Stream output)

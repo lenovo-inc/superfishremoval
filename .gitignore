@@ -3,3 +3,6 @@ SuperFishRemovalTool/obj
 SuperFishRemovalTool/bin
 *.suo
 *.csproj.user
+build/.vs
+test/SuperFishRemovalTool.Test/obj
+test/SuperFishRemovalTool.Test/bin
