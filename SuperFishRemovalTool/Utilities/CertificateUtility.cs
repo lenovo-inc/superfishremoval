@@ -22,8 +22,8 @@ namespace SuperFishRemovalTool.Utilities
                 {
                     if (IsSuperfishCert(mCert))
                     {
-                        Console.WriteLine("Found Superfish certificate - Store: " + storeValue.ToString());
-                        Console.WriteLine("  Certificate: " + mCert.Issuer);
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish certificate - Store: " + storeValue.ToString());
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "  Certificate: " + mCert.Issuer);
                         FoundCertificate = true;
                         break;
                     }
@@ -55,17 +55,17 @@ namespace SuperFishRemovalTool.Utilities
                     {
                         FoundSuperfishCert = true;
 
-                        Console.WriteLine("Found Superfish certificate - Store: " + storeValue.ToString());
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish certificate - Store: " + storeValue.ToString());
                         try
                         {
-                            Console.WriteLine("  DELETING Certificate: " + mCert.Issuer);
+                            Logging.Logger.Log(Logging.LogSeverity.Information, "  DELETING Certificate: " + mCert.Issuer);
                             store.Remove(mCert);                            
                         }
                             catch (Exception ex)
                         {
                             ProblemDeletingCertificate = true;
 
-                            Console.WriteLine("  Exception deleting certificate: " + ex.ToString());
+                            Logging.Logger.Log(ex, "  Exception deleting certificate: " + ex.ToString());
                             //throw;
                         }
                     }

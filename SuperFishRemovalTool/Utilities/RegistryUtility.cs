@@ -20,12 +20,12 @@ namespace SuperFishRemovalTool.Utilities
 
             if (RegistryKey32Found)
             {
-                Console.WriteLine("Superfish registry key found: HKLM\\SOFTWARE\\Wow6432Node\\VisualDiscovery");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key found: HKLM\\SOFTWARE\\Wow6432Node\\VisualDiscovery");
             }
 
             if (RegistryKey64Found)
             {
-                Console.WriteLine("Superfish registry key found: HKLM\\SOFTWARE\\VisualDiscovery");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key found: HKLM\\SOFTWARE\\VisualDiscovery");
             }
 
             return (RegistryKey32Found || RegistryKey64Found);
@@ -41,7 +41,7 @@ namespace SuperFishRemovalTool.Utilities
                 RegistryKey32Removed = DeleteSoftwareRegistry("SOFTWARE\\Wow6432Node");
                 if (RegistryKey32Removed)
                 {
-                    Console.WriteLine("Superfish registry key removed: HKLM\\SOFTWARE\\Wow6432Node\\VisualDiscovery");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key removed: HKLM\\SOFTWARE\\Wow6432Node\\VisualDiscovery");
                 }
             }
 
@@ -50,7 +50,7 @@ namespace SuperFishRemovalTool.Utilities
                 RegistryKey64Removed = DeleteSoftwareRegistry("SOFTWARE");
                 if (RegistryKey64Removed)
                 {
-                    Console.WriteLine("Superfish registry key removed: HKLM\\SOFTWARE\\VisualDiscovery");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key removed: HKLM\\SOFTWARE\\VisualDiscovery");
                 }
             }
 

@@ -22,32 +22,32 @@ namespace SuperFishRemovalTool.Utilities
             {
                 if (FoundCertFirefox = HandleMozilla("Mozilla\\Firefox\\Profiles", false))
                 {
-                    Console.WriteLine("  Firefox found - Certificate exists");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Firefox found - Certificate exists");
                 }
                 else
                 {
-                    Console.WriteLine("  Firefox found - NO certificate exists");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Firefox found - NO certificate exists");
                 }
             }
             else
             {
-                Console.WriteLine("  Firefox not found");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "  Firefox not found");
             }
 
             if (System.IO.Directory.Exists(ThunderbirdProfilesDir))
             {
                 if (FoundCertThunderbird = HandleMozilla("Thunderbird\\Profiles", false))
                 {
-                    Console.WriteLine("  Thunderbird found - Certificate exists");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Thunderbird found - Certificate exists");
                 }
                 else
                 {
-                    Console.WriteLine("  Thunderbird found - NO certificate exists");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Thunderbird found - NO certificate exists");
                 }
             }
             else
             {
-                Console.WriteLine("  Thunderbird not found");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "  Thunderbird not found");
             }
 
             bool retValue = (FoundCertFirefox) ? true : FoundCertThunderbird;
@@ -68,11 +68,11 @@ namespace SuperFishRemovalTool.Utilities
             {
                 if (RemovedCertFirefox = HandleMozilla("Mozilla\\Firefox\\Profiles", true))
                 {
-                    Console.WriteLine("  Firefox found - Certificate REMOVED");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Firefox found - Certificate REMOVED");
                 }
                 else
                 {
-                    Console.WriteLine("  Firefox found - Certificate NOT removed");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Firefox found - Certificate NOT removed");
                 }
 
                 retValue = RemovedCertFirefox;
@@ -82,11 +82,11 @@ namespace SuperFishRemovalTool.Utilities
             {
                 if (RemovedCertThunderbird = HandleMozilla("Thunderbird\\Profiles", true))
                 {
-                    Console.WriteLine("  Thunderbird found - Certificate REMOVED");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Thunderbird found - Certificate REMOVED");
                 }
                 else
                 {
-                    Console.WriteLine("  Thunderbird found - Certificate NOT removed");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Thunderbird found - Certificate NOT removed");
                 }
 
                 retValue = (FoundCertFirefox && (!RemovedCertFirefox)) ? false : RemovedCertThunderbird;
@@ -126,7 +126,7 @@ namespace SuperFishRemovalTool.Utilities
                 }
                 finally
                 {
-                    Console.WriteLine("done");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "done");
                 }
 
                 string certutilProgram = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval", "certutil.exe");
@@ -163,7 +163,7 @@ namespace SuperFishRemovalTool.Utilities
                     }
                     finally
                     {
-                        Console.WriteLine("  Result = " + certutilResult);
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "  Result = " + certutilResult);
                     }
                 }
 
@@ -174,7 +174,7 @@ namespace SuperFishRemovalTool.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("  Exception removing Mozilla tools - " + ex.ToString());
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Exception removing Mozilla tools - " + ex.ToString());
                     // Just try again...
                     try
                     {
@@ -183,11 +183,11 @@ namespace SuperFishRemovalTool.Utilities
                     catch { }
                 }
 
-                Console.WriteLine("  Mozilla complete");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "  Mozilla complete");
             }
             else
             {
-                Console.WriteLine("  Skip Mozilla - Does not look like Profiles directory exists");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "  Skip Mozilla - Does not look like Profiles directory exists");
             }
 
             return result;

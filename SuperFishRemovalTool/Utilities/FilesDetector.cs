@@ -13,10 +13,10 @@ namespace SuperFishRemovalTool.Utilities
 
             if ((null != allfiles) && (0 < allfiles.Length))
             {
-                Console.WriteLine("Found Superfish files: ");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish files: ");
                 foreach (string file in allfiles)
                 {
-                    Console.WriteLine("  " + file);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  " + file);
                 }
 
                 return true;
@@ -35,10 +35,10 @@ namespace SuperFishRemovalTool.Utilities
             {
                 bool ProblemDeletingFile = false;
 
-                Console.WriteLine("Deleting Superfish files: ");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "Deleting Superfish files: ");
                 foreach (string file in allfiles)
                 {
-                    Console.WriteLine("  " + file);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  " + file);
                     try
                     {
                         System.IO.File.Delete(file);
@@ -46,13 +46,13 @@ namespace SuperFishRemovalTool.Utilities
                         if (System.IO.File.Exists(file))
                         {
                             ProblemDeletingFile = true;
-                            Console.WriteLine("  Error deleting " + file);
+                            Logging.Logger.Log(Logging.LogSeverity.Information, "  Error deleting " + file);
                         }
                     }
                     catch (Exception ex)
                     {
                         ProblemDeletingFile = true;
-                        Console.WriteLine("  Exception deleting " + file + " - " + ex.ToString());
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "  Exception deleting " + file + " - " + ex.ToString());
                     }
                 }
                 

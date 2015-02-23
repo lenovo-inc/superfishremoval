@@ -27,7 +27,7 @@ namespace SuperFishRemovalTool.Utilities
             string SuperfishDir = GetSuperfishProgramFiles();
             if (FoundInProgramFiles = (!String.IsNullOrWhiteSpace(SuperfishDir)))
             {
-                Console.WriteLine("Found Superfish directory: " + SuperfishDir);
+                Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish directory: " + SuperfishDir);
             }
 
 
@@ -41,11 +41,11 @@ namespace SuperFishRemovalTool.Utilities
             {
                 if (!String.IsNullOrWhiteSpace(Uninstall32))
                 {
-                    Console.WriteLine("Found Superfish uninstall entry: " + Uninstall32);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish uninstall entry: " + Uninstall32);
                 }
                 if (!String.IsNullOrWhiteSpace(Uninstall64))
                 {
-                    Console.WriteLine("Found Superfish uninstall entry: " + Uninstall64);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish uninstall entry: " + Uninstall64);
                 }
             }
 
@@ -71,12 +71,12 @@ namespace SuperFishRemovalTool.Utilities
 
                 if (0 == ProcessStarter.StartWithoutWindow("sc", "stop VisualDiscovery", true))
                 {
-                    Console.WriteLine("Superfish service stopped");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish service stopped");
                 }
 
                 if (KillVisualDiscoveryProcess())
                 {
-                    Console.WriteLine("Superfish processed stopped");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish processed stopped");
                 }
 
                 AppRemoved32 = (0 == ProcessStarter.StartWithWindow(Uninstall32, true));
@@ -91,7 +91,7 @@ namespace SuperFishRemovalTool.Utilities
 
                 if (AppRemoved32 && (!System.IO.Directory.Exists(SuperfishDir)))
                 {
-                    Console.WriteLine("Superfish application removed");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application removed");
                 }
             }
 
@@ -102,12 +102,12 @@ namespace SuperFishRemovalTool.Utilities
 
                 if (0 == ProcessStarter.StartWithoutWindow("sc", "stop VisualDiscovery", true))
                 {
-                    Console.WriteLine("Superfish service stopped");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish service stopped");
                 }
 
                 if (KillVisualDiscoveryProcess())
                 {
-                    Console.WriteLine("Superfish processed stopped");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish processed stopped");
                 }
 
                 AppRemoved64 = (0 == ProcessStarter.StartWithWindow(Uninstall64, true));
@@ -122,7 +122,7 @@ namespace SuperFishRemovalTool.Utilities
 
                 if (AppRemoved64 && (!System.IO.Directory.Exists(SuperfishDir)))
                 {
-                    Console.WriteLine("Superfish application removed");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application removed");
                 }
             }
 
@@ -138,18 +138,18 @@ namespace SuperFishRemovalTool.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception trying to remove directory: " + SuperfishCheckDir + " - " + ex.ToString());
+                    Logging.Logger.Log(ex, ("Exception trying to remove directory: " + SuperfishCheckDir + " - " + ex.ToString()));
                 }
 
                 if (!(System.IO.Directory.Exists(SuperfishCheckDir)))
                 {
                     DirRemoved32 = true;
 
-                    Console.WriteLine("Superfish application directory removed: " + SuperfishCheckDir);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application directory removed: " + SuperfishCheckDir);
                 }
                 else
                 {
-                    Console.WriteLine("Superfish application directory NOT removed: " + SuperfishCheckDir);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application directory NOT removed: " + SuperfishCheckDir);
                 }                
             }
 
@@ -164,18 +164,18 @@ namespace SuperFishRemovalTool.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception trying to remove directory: " + SuperfishCheckDir + " - " + ex.ToString());
+                    Logging.Logger.Log(ex, "Exception trying to remove directory: " + SuperfishCheckDir + " - " + ex.ToString());
                 }
 
                 if (!(System.IO.Directory.Exists(SuperfishCheckDir)))
                 {
                     DirRemoved64 = true;
 
-                    Console.WriteLine("Superfish application directory removed: " + SuperfishCheckDir);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application directory removed: " + SuperfishCheckDir);
                 }
                 else
                 {
-                    Console.WriteLine("Superfish application directory NOT removed: " + SuperfishCheckDir);
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application directory NOT removed: " + SuperfishCheckDir);
                 }
             }
 
@@ -315,7 +315,7 @@ namespace SuperFishRemovalTool.Utilities
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception trying to kill process - " + ex.ToString());
+                Logging.Logger.Log(ex, "Exception trying to kill process - " + ex.ToString());
             }
 
             return ProcessKilled;

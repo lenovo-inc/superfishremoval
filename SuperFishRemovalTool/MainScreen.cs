@@ -97,7 +97,7 @@ namespace SuperFishRemovalTool
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while preparing base state of UI");
             }
 
         }
@@ -237,7 +237,7 @@ namespace SuperFishRemovalTool
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while adding result label");
             }
             return error;
         }
@@ -254,7 +254,7 @@ namespace SuperFishRemovalTool
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while updating version field");
             }
         }
         #endregion UI Toggles
@@ -282,7 +282,7 @@ namespace SuperFishRemovalTool
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while running removal agents");
             }
         }
 
@@ -376,7 +376,7 @@ namespace SuperFishRemovalTool
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while restarting device");
             }
             Application.Exit();
         }
@@ -397,7 +397,7 @@ namespace SuperFishRemovalTool
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while handling restart button click ");
             }
         }
 
@@ -409,7 +409,7 @@ namespace SuperFishRemovalTool
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while handling restart later click");
             }
         }
 
@@ -466,7 +466,7 @@ namespace SuperFishRemovalTool
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while trying to invoke superfish detetctor ");
             }
             return result;
         }
@@ -484,7 +484,7 @@ namespace SuperFishRemovalTool
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logging.Logger.Log(ex, "Exception while handling link label click");
             }
         }
 
