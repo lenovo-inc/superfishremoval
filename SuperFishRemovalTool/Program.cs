@@ -85,7 +85,8 @@ namespace SuperFishRemovalTool
                     else
                     {
                         log("Found - ERROR Removing");
-                        ExitCode = (ExitCode == 0) ? tuple.Item3 : 0;
+                        //We want the error code to be set to the first error that occurs. 
+                        ExitCode = (ExitCode == 0) ? tuple.Item3 : ExitCode;
                     }
                 }
                 else
