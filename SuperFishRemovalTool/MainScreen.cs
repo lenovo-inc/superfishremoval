@@ -43,7 +43,7 @@ namespace SuperFishRemovalTool
         public MainScreen()
         {
             InitializeComponent();
-            this.Text = Localizer.Get().UtilityName; // Window title
+            this.Text = Localization.LocalizationManager.Get().UtilityName; // Window title
         }
 
         protected override void OnLoad(EventArgs e)
@@ -58,10 +58,11 @@ namespace SuperFishRemovalTool
         {
             try
             {
-                var stringTable = Localizer.Get();
+                var stringTable = Localization.LocalizationManager.Get();
                 this.IsDoingWork = false;
                 this.Text = stringTable.UtilityName;
-                this.IntroLabel.Text = stringTable.UtilityAbout;
+                this.AboutSuperfishLabel.Text = stringTable.AboutSuperfish;
+                this.AboutThisToolLabel.Text = stringTable.AboutThisTool;
                 this.RemoveButton.BackColor = Constants.Colors.ButtonBackground;
                 this.RemoveButton.ForeColor = Constants.Colors.ButtonForeground;
                 this.RemoveButton.Text = stringTable.Remove;
@@ -170,23 +171,28 @@ namespace SuperFishRemovalTool
         /// <param name="result"></param>
         private void UpdateOverallStatusLabel(OverallResult result)
         {
-            var stringTable = Localizer.Get();
+            var stringTable = Localization.LocalizationManager.Get();
             string newText = string.Empty;
             switch (result)
             {
                 case OverallResult.None:
                     goto case OverallResult.Error;
+
                 case OverallResult.NoItemsFound:
                     newText = stringTable.OverallStatusNotOnSystem;
                     break;
+
                 case OverallResult.ItemsFoundAndRemoved:
                     newText = stringTable.OverallStatusAppRemoved;
                     break;
+
                 case OverallResult.ItemsFoundButNotRemoved:
                     goto case OverallResult.Error;
+
                 case OverallResult.Error:
                     newText = stringTable.OverallStatusError;
                     break;
+
                 default:
                     break;
             }
@@ -203,7 +209,7 @@ namespace SuperFishRemovalTool
             bool error = false;
             try
             {
-                var stringTable = Localizer.Get();
+                var stringTable = Localization.LocalizationManager.Get();
                 string text = String.Empty;
                 if (result == null || result.DidFail)
                 {
@@ -250,7 +256,7 @@ namespace SuperFishRemovalTool
             try
             {
                 var version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
-                this.VersionLabel.Text = String.Format("{0}: {1}", Localizer.Get().Version, version);
+                this.VersionLabel.Text = String.Format("{0}: {1}", Localization.LocalizationManager.Get().Version, version);
             }
             catch(Exception ex)
             {
@@ -269,7 +275,7 @@ namespace SuperFishRemovalTool
                 bool areAnyBrowsersRunning = BrowserDetector.AreAnyWebBrowsersRunning();
                 if (areAnyBrowsersRunning)
                 {
-                    MessageBox.Show(Localizer.Get().CloseWebBrowsers, Localizer.Get().UtilityName);
+                    MessageBox.Show(Localization.LocalizationManager.Get().CloseWebBrowsers, Localization.LocalizationManager.Get().UtilityName);
                 }
 
                 this.OverallResultLabel.ResetText();
@@ -299,10 +305,10 @@ namespace SuperFishRemovalTool
                     if(bgWorker != null)
                     {
                         OverallResult overallResult = OverallResult.None;
-                        var stringTable = Localizer.Get();
+                        var stringTable = Localization.LocalizationManager.Get();
 
 
-                        var agents = GetSuperfishRemovalAgents().ToList();
+                        var agents = Utilities.RemovalAgentFactory.GetRemovalAgents().ToList();
                         if(agents != null && agents.Any())
                         {
                             foreach(var agent in agents)
@@ -444,18 +450,6 @@ namespace SuperFishRemovalTool
         #endregion events
 
         #region Private Static methods
-        private static IEnumerable<Utilities.ISuperfishDetector> GetSuperfishRemovalAgents()
-        {
-            return new List<Utilities.ISuperfishDetector>()
-            {
-                       new Utilities.ApplicationUtility(),
-                       new Utilities.CertificateUtility(),
-                       new Utilities.RegistryUtility(),
-                       new Utilities.FilesDetector(),
-                       new Utilities.MozillaCertificateUtility(),
-            };
-        }
-
 
         private static Utilities.FixResult TryToExecuteRemoval(Utilities.ISuperfishDetector detector)
         {
@@ -538,14 +532,10 @@ namespace SuperFishRemovalTool
         /// <param name="previous"></param>
         /// <param name="mostRecent"></param>
         /// <returns></returns>
-        private static OverallResult CalculateMergedResult(OverallResult previous, OverallResult mostRecent)
+        internal static OverallResult CalculateMergedResult(OverallResult previous, OverallResult mostRecent)
         {
             var mostRelevant = previous;
-            if (previous > mostRecent)
-            {
-                mostRelevant = previous;
-            }
-            else
+            if (mostRecent > previous)
             {
                 mostRelevant = mostRecent;
             }

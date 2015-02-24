@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -54,6 +55,7 @@
     <Compile Include="Mocks\MockSuperfishDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestSuperfishDetectorExtension.cs" />
+    <Compile Include="TheMainScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SuperFishRemovalTool\SuperFishRemovalTool.csproj">

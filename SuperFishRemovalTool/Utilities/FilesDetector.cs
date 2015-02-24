@@ -5,7 +5,7 @@ namespace SuperFishRemovalTool.Utilities
 {
     class FilesDetector : ISuperfishDetector
     {
-        public string UtilityName { get { return Localizer.Get().DetectorNameFile; } }
+        public string UtilityName { get { return Localization.LocalizationManager.Get().DetectorNameFile; } }
 
         public bool DoesExist()
         {

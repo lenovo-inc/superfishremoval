@@ -5,14 +5,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lenovo SuperFish Removal Tool")]
+[assembly: AssemblyTitle("Superfish Removal Tool")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lenovo Inc.")]
-[assembly: AssemblyProduct("Lenovo SuperFish Removal Tool")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyProduct("Superfish Removal Tool")]
+[assembly: AssemblyCopyright("Copyright Lenovo ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: InternalsVisibleTo("SuperFishRemovalTool.Test")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

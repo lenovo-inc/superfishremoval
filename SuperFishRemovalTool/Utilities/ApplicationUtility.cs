@@ -16,7 +16,7 @@ namespace SuperFishRemovalTool.Utilities
         //public const string REGISTRY_KEY_DISPLAYICO = "DisplayIcon";
         //public const string REGISTRY_KEY_DISPLAYVER = "DisplayVersion";
 
-        public string UtilityName { get { return Localizer.Get().DetectorNameApp; } }
+        public string UtilityName { get { return Localization.LocalizationManager.Get().DetectorNameApp; } }
 
         public bool DoesExist()
         {

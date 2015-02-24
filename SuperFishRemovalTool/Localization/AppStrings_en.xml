@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LocalizationSet language="en">
+  <ItemList>
+    <Item key="DetectorNameApp">Superfish Application</Item>
+    <Item key="DetectorNameReg">Superfish Registry entries</Item>
+    <Item key="DetectorNameCert">SuperFish Root Certificate</Item>
+    <Item key="DetectorNameFile">SuperFish Files</Item>
+    <Item key="DetectorNameMozilla">SuperFish Root Certificate for Mozilla products</Item>
+    <Item key="Version">Version</Item>
+    <Item key="AboutSuperfish">SuperFish was pre-installed on a limited group of Lenovo branded notebooks  beginning  September, 2014.  Lenovo recommends removing SuperFish and the SuperFish certificates from all systems.</Item>
+
+    <Item key="AboutThisTool">This utility will completely analyze your system for this problem and remove the SuperFish application, associated registry entries, files and security certificates, if needed.</Item>
+    <Item key="UtilityName">SuperFish Removal Utility</Item>
+    <Item key="SelectRemoveToStart">Select 'Remove' to start</Item>
+    <Item key="CloseWebBrowsers">Please close all browsers before continuing</Item>
+    <Item key="Remove">Analyze and Remove SuperFish Now</Item>
+    <Item key="LearnMoreText">Click here to learn about this tool</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">SuperFish was removed from this system.   We recommend restarting your system.</Item>
+    <Item key="OverallStatusError">Error:  We could not remove one or more components.  We recommend you follow the manual removal instructions below.</Item>
+    <Item key="OverallStatusNotOnSystem">Complete:  SuperFish was not found on this system and no action is required.</Item>
+    <Item key="RestartNow">Restart now</Item>
+    <Item key="RestartLater">Restart later</Item>
+    <Item key="ResultFoundAndRemoved">Found and removed</Item>
+    <Item key="ResultFoundButNotRemoved">Found but not removed</Item>
+    <Item key="ResultNotFound">Not Found</Item>
+    <Item key="Error">Error</Item>
+    <Item key="MoreInformationText">More information:</Item>
+    <Item key="ManualRemovalInstructionsText">Manual Removal Instructions</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo Security Advisory</Item>
+    <Item key="LenovoStatementText">Lenovo Statement</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovo License Agreement</Item>
+  </ItemList>
+</LocalizationSet>

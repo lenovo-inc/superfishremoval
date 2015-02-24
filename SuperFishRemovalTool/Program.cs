@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SuperFishRemovalTool.Utilities;
+using SuperFishRemovalTool.Logging;
 
 namespace SuperFishRemovalTool
 {
@@ -22,9 +23,9 @@ namespace SuperFishRemovalTool
         static int Main(string[] args)
         {
             int ExitCode = 0;
-            Logging.Logger.IsLoggingEnabled = true;
-            Logging.Logger.AddLogger(new Logging.ConsoleLogger());
-            //Logging.Logger.AddLogger(new Logging.FileLogger());
+            Logger.IsLoggingEnabled = true;
+            Logger.AddLogger(new Logging.ConsoleLogger());
+            //Logger.AddLogger(new Logging.FileLogger());
 
             // Run in silent, console mode if requested
             if ((0 < args.Length) && (0 == String.Compare("/silent", args[0], true, System.Globalization.CultureInfo.InvariantCulture)))
@@ -51,123 +52,59 @@ namespace SuperFishRemovalTool
         {
             int ExitCode = 0;
 
-            Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check");
+            Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check");
 
-            var appChecker = new Utilities.ApplicationUtility();
-            Utilities.FixResult appResult = appChecker.RemoveItem();
-            if (appResult.DidFail)
+            var agents = Utilities.RemovalAgentFactory.GetRemovalAgents().ToList();
+            if (agents != null && agents.Any())
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: ERROR");
-            }
-            else if (appResult.DidExist)
-            {
-                if (appResult.WasRemoved)
+                int agentNumber = 1;
+                foreach (var agent in agents)
                 {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: Found - ERROR Removing");
-                    ExitCode = 1;  //ExitCode = (0 == ExitCode) ? 1 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: Not found");
-            }
 
-            var certChecker = new Utilities.CertificateUtility();
-            Utilities.FixResult certResult = certChecker.RemoveItem();
-            if (certResult.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: ERROR");
-            }
-            else if (certResult.DidExist)
-            {
-                if (certResult.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 2 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: Not found");
-            }
+                    Action<string> logAgentInfo = (status) => { 
+                        Logger.Log(Logging.LogSeverity.Information, "{0}: {1}", status, agent.UtilityName); 
+                    };
+                    Action<string> logAgentError = (status) =>{ 
+                        Logger.Log(Logging.LogSeverity.Error, "{0}: {1}", status, agent.UtilityName); 
+                    };
 
-            var certChecker2 = new Utilities.MozillaCertificateUtility();
-            Utilities.FixResult certResult2 = certChecker2.RemoveItem();
-            if (certResult2.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: ERROR");
-            }
-            else if (certResult2.DidExist)
-            {
-                if (certResult2.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 3 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: Not found");
-            }
+                    try
+                    {
+                        logAgentInfo("Working...");
 
-            var regChecker = new Utilities.RegistryUtility();
-            Utilities.FixResult regResult = regChecker.RemoveItem();
-            if (regResult.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: ERROR");
-            }
-            else if (regResult.DidExist)
-            {
-                if (regResult.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 4 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: Not found");
-            }
+                        Utilities.FixResult removalResult = agent.RemoveItem();
+                        if (removalResult.DidFail)
+                        {
+                            logAgentError("Error, failed while detecting / removing");
+                        }
+                        else if (removalResult.DidExist)
+                        {
+                            if (removalResult.WasRemoved)
+                            {
+                                logAgentInfo("Found and removed");
+                            }
+                            else
+                            {
+                                logAgentError("Found BUT NOT removed");
+                                // Error code should be the first error that occurs. 
+                                ExitCode = (0 == ExitCode) ? agentNumber : ExitCode;
+                            }
+                        }
+                        else
+                        {
+                            logAgentInfo("Not found");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log(ex, "Exception while working on agent # {0}", agentNumber);
+                    }
+                    agentNumber++;
+                } // End foreach agent
+            }// End all agents
 
-            var fileChecker = new Utilities.FilesDetector();
-            Utilities.FixResult fileResult = fileChecker.RemoveItem();
-            if (fileResult.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: ERROR");
-            }
-            else if (fileResult.DidExist)
-            {
-                if (fileResult.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 5 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: Not found");
-            }
-            Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check Complete");
+            Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check Complete!");
+            Logger.Log(Logging.LogSeverity.Information, "Return code: {0}", ExitCode);
 
             return ExitCode;
         }

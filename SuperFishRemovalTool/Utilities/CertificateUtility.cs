@@ -4,7 +4,7 @@ namespace SuperFishRemovalTool.Utilities
 {
     internal class CertificateUtility : ISuperfishDetector
     {
-        public string UtilityName { get { return Localizer.Get().DetectorNameCert; } }
+        public string UtilityName { get { return Localization.LocalizationManager.Get().DetectorNameCert; } }
 
         public bool DoesExist()
         {

@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             this.RemoveButton = new System.Windows.Forms.Button();
-            this.IntroLabel = new System.Windows.Forms.Label();
+            this.AboutSuperfishLabel = new System.Windows.Forms.Label();
             this.MoreInfoLabel = new System.Windows.Forms.Label();
             this.ManualRemovalLinkLabel = new System.Windows.Forms.LinkLabel();
             this.SecurityAdvisoryLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -42,6 +42,7 @@
             this.RestartLaterButton = new System.Windows.Forms.Button();
             this.LicenseAgreementLinkLabel = new System.Windows.Forms.LinkLabel();
             this.VersionLabel = new System.Windows.Forms.Label();
+            this.AboutThisToolLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // RemoveButton
@@ -55,14 +56,14 @@
             this.RemoveButton.UseVisualStyleBackColor = true;
             this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
-            // IntroLabel
+            // AboutSuperfishLabel
             // 
-            this.IntroLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IntroLabel.Location = new System.Drawing.Point(13, 13);
-            this.IntroLabel.Name = "IntroLabel";
-            this.IntroLabel.Size = new System.Drawing.Size(659, 91);
-            this.IntroLabel.TabIndex = 7;
-            this.IntroLabel.Text = "Introduction";
+            this.AboutSuperfishLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AboutSuperfishLabel.Location = new System.Drawing.Point(13, 13);
+            this.AboutSuperfishLabel.Name = "AboutSuperfishLabel";
+            this.AboutSuperfishLabel.Size = new System.Drawing.Size(659, 46);
+            this.AboutSuperfishLabel.TabIndex = 7;
+            this.AboutSuperfishLabel.Text = "AboutSuperFish";
             // 
             // MoreInfoLabel
             // 
@@ -181,11 +182,21 @@
             this.VersionLabel.TabIndex = 19;
             this.VersionLabel.Text = "Version";
             // 
+            // AboutThisToolLabel
+            // 
+            this.AboutThisToolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AboutThisToolLabel.Location = new System.Drawing.Point(13, 68);
+            this.AboutThisToolLabel.Name = "AboutThisToolLabel";
+            this.AboutThisToolLabel.Size = new System.Drawing.Size(659, 46);
+            this.AboutThisToolLabel.TabIndex = 20;
+            this.AboutThisToolLabel.Text = "AboutThisTool";
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 535);
+            this.Controls.Add(this.AboutThisToolLabel);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.LicenseAgreementLinkLabel);
             this.Controls.Add(this.RestartLaterButton);
@@ -197,7 +208,7 @@
             this.Controls.Add(this.SecurityAdvisoryLinkLabel);
             this.Controls.Add(this.ManualRemovalLinkLabel);
             this.Controls.Add(this.MoreInfoLabel);
-            this.Controls.Add(this.IntroLabel);
+            this.Controls.Add(this.AboutSuperfishLabel);
             this.Controls.Add(this.RemoveButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -213,7 +224,7 @@
         #endregion
 
         private System.Windows.Forms.Button RemoveButton;
-        private System.Windows.Forms.Label IntroLabel;
+        private System.Windows.Forms.Label AboutSuperfishLabel;
         private System.Windows.Forms.Label MoreInfoLabel;
         private System.Windows.Forms.LinkLabel ManualRemovalLinkLabel;
         private System.Windows.Forms.LinkLabel SecurityAdvisoryLinkLabel;
@@ -225,5 +236,6 @@
         private System.Windows.Forms.Button RestartLaterButton;
         private System.Windows.Forms.LinkLabel LicenseAgreementLinkLabel;
         private System.Windows.Forms.Label VersionLabel;
+        private System.Windows.Forms.Label AboutThisToolLabel;
     }
 }
