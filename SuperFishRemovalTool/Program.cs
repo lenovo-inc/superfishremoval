@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using SuperFishRemovalTool.Utilities;
 using SuperFishRemovalTool.Logging;
 using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace SuperFishRemovalTool
 {
@@ -53,15 +54,8 @@ namespace SuperFishRemovalTool
 
             Logger.Log(LogSeverity.Information, "Superfish Removal Check");
 
-            //The error code for a specific SuperfishDetector is fixed, therefore it's best to set it here rather than using a for loop.
-            IEnumerable<Tuple<ISuperfishDetector, string, int>> detectors = new List<Tuple<ISuperfishDetector, string, int>>
-            {
-                new Tuple<ISuperfishDetector, string, int>(new ApplicationUtility(), "Application", 1),
-                new Tuple<ISuperfishDetector, string, int>(new CertificateUtility(), "Certificates", 2),
-                new Tuple<ISuperfishDetector, string, int>(new MozillaCertificateUtility(), "Mozilla Certificates", 3),
-                new Tuple<ISuperfishDetector, string, int>(new RegistryUtility(), "Registry Entries", 4),
-                new Tuple<ISuperfishDetector, string, int>(new FilesDetector(), "Files", 5),
-            };
+            //Tuple items: Detector, name to log, Error Code on failure.
+            IEnumerable<Tuple<ISuperfishDetector, string, int>> detectors = getSuperfishDetectors();
 
             Action<string, string> logInformation = (utilityType, message) 
                 => Logger.Log(LogSeverity.Information, String.Format("Superfish {0}: {1}", utilityType, message));
@@ -95,6 +89,29 @@ namespace SuperFishRemovalTool
             }
             
             return ExitCode;
+        }
+
+
+        private static IEnumerable<Tuple<ISuperfishDetector, string, int>> getSuperfishDetectors()
+        {
+            //Allow each individual constructor to throw an exception without affecting the creation status of the other detectors.
+            Func<Func<ISuperfishDetector>, string, int, Tuple<ISuperfishDetector, string, int>> create = (detectorCreator, name, errorCode) =>
+            {
+                try { return new Tuple<ISuperfishDetector, string, int>(detectorCreator(), name, errorCode); }
+                catch (Exception e) { Logger.Log(e, "Failed to create Superfish Detector"); return null; }
+            };
+
+            var ret = new List<Tuple<ISuperfishDetector, string, int>>
+            {
+                create(() => new ApplicationUtility(), "Application", 1),
+                create(() => new CertificateUtility(), "Certificates", 2),
+                create(() => new MozillaCertificateUtility(), "Mozilla Certificates", 3),
+                create(() => new RegistryUtility(), "Registry Entries", 4),
+                create(() => new FilesDetector(), "Files", 5),
+            };
+
+            //Remove any utility which threw an exception.
+            return from utility in ret where utility != null select utility;
         }
     }
 }
