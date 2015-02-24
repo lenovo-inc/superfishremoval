@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SuperFishRemovalTool.Utilities;
+using SuperFishRemovalTool.Logging;
 
 namespace SuperFishRemovalTool
 {
@@ -53,122 +54,46 @@ namespace SuperFishRemovalTool
 
             Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check");
 
-            var appChecker = new Utilities.ApplicationUtility();
-            Utilities.FixResult appResult = appChecker.RemoveItem();
-            if (appResult.DidFail)
+            //The error code for a specific SuperfishDetector is fixed, therefore it's best to set it here rather than using a for loop.
+            IEnumerable<Tuple<ISuperfishDetector, string, int>> detectors = new List<Tuple<ISuperfishDetector, string, int>>
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: ERROR");
-            }
-            else if (appResult.DidExist)
+                new Tuple<ISuperfishDetector, string, int>(new ApplicationUtility(), "Application", 1),
+                new Tuple<ISuperfishDetector, string, int>(new CertificateUtility(), "Certificates", 2),
+                new Tuple<ISuperfishDetector, string, int>(new MozillaCertificateUtility(), "Mozilla Certificates", 3),
+                new Tuple<ISuperfishDetector, string, int>(new RegistryUtility(), "Registry Entries", 4),
+                new Tuple<ISuperfishDetector, string, int>(new FilesDetector(), "Files", 5),
+            };
+
+            Action<string, string> logInformation = (utilityType, message) 
+                => Logger.Log(LogSeverity.Information, String.Format("Superfish {0}: {1}", utilityType, message));
+
+            foreach (var tuple in detectors)
             {
-                if (appResult.WasRemoved)
+                Action<string> log = (message) => logInformation(tuple.Item2, message);
+                ISuperfishDetector utility = tuple.Item1;
+                FixResult result = utility.RemoveItem();
+                if (result.DidFail)
                 {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: Found & Removed");
+                    log("ERROR");
+                }
+                else if (result.DidExist)
+                {
+                    if (result.WasRemoved)
+                    {
+                        log("Found & Removed");
+                    }
+                    else
+                    {
+                        log("Found - ERROR Removing");
+                        ExitCode = (ExitCode == 0) ? tuple.Item3 : 0;
+                    }
                 }
                 else
                 {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: Found - ERROR Removing");
-                    ExitCode = 1;  //ExitCode = (0 == ExitCode) ? 1 : 0;
+                    log("Not found");
                 }
             }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Application: Not found");
-            }
-
-            var certChecker = new Utilities.CertificateUtility();
-            Utilities.FixResult certResult = certChecker.RemoveItem();
-            if (certResult.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: ERROR");
-            }
-            else if (certResult.DidExist)
-            {
-                if (certResult.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 2 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Certificates: Not found");
-            }
-
-            var certChecker2 = new Utilities.MozillaCertificateUtility();
-            Utilities.FixResult certResult2 = certChecker2.RemoveItem();
-            if (certResult2.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: ERROR");
-            }
-            else if (certResult2.DidExist)
-            {
-                if (certResult2.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 3 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Mozilla Certificates: Not found");
-            }
-
-            var regChecker = new Utilities.RegistryUtility();
-            Utilities.FixResult regResult = regChecker.RemoveItem();
-            if (regResult.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: ERROR");
-            }
-            else if (regResult.DidExist)
-            {
-                if (regResult.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 4 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Registry Entries: Not found");
-            }
-
-            var fileChecker = new Utilities.FilesDetector();
-            Utilities.FixResult fileResult = fileChecker.RemoveItem();
-            if (fileResult.DidFail)
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: ERROR");
-            }
-            else if (fileResult.DidExist)
-            {
-                if (fileResult.WasRemoved)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: Found & Removed");
-                }
-                else
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: Found - ERROR Removing");
-                    ExitCode = (0 == ExitCode) ? 5 : 0;
-                }
-            }
-            else
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Files: Not found");
-            }
-            Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check Complete");
-
+            
             return ExitCode;
         }
     }
