@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SuperFishRemovalTool.Utilities;
 using SuperFishRemovalTool.Logging;
+using System.Runtime.InteropServices;
 
 namespace SuperFishRemovalTool
 {
     static class Program
     {
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll")]
         static extern bool AttachConsole(int dwProcessId);
 
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
 
         /// <summary>
@@ -23,8 +22,8 @@ namespace SuperFishRemovalTool
         static int Main(string[] args)
         {
             int ExitCode = 0;
-            Logging.Logger.IsLoggingEnabled = true;
-            Logging.Logger.AddLogger(new Logging.ConsoleLogger());
+            Logger.IsLoggingEnabled = true;
+            Logger.AddLogger(new ConsoleLogger());
             //Logging.Logger.AddLogger(new Logging.FileLogger());
 
             // Run in silent, console mode if requested
@@ -52,7 +51,7 @@ namespace SuperFishRemovalTool
         {
             int ExitCode = 0;
 
-            Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check");
+            Logger.Log(LogSeverity.Information, "Superfish Removal Check");
 
             //The error code for a specific SuperfishDetector is fixed, therefore it's best to set it here rather than using a for loop.
             IEnumerable<Tuple<ISuperfishDetector, string, int>> detectors = new List<Tuple<ISuperfishDetector, string, int>>
