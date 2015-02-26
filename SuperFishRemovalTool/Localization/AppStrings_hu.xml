@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="hu">
+  <ItemList>
+    <Item key="DetectorNameApp">Superfish alkalmazás</Item>
+    <Item key="DetectorNameReg">A Superfish beállításjegyzék-bejegyzései</Item>
+    <Item key="DetectorNameCert">SuperFish-főtanúsítvány</Item>
+    <Item key="DetectorNameFile">A SuperFish fájljai</Item>
+    <Item key="DetectorNameMozilla">SuperFish-főtanúsítvány Mozilla-termékekhez</Item>
+    <Item key="Version">Változat</Item>
+    <Item key="AboutSuperfish">2014 szeptemberétől a SuperFish előtelepítve megtalálható bizonyos Lenovo márkájú notebookokon. A Lenovo azt javasolja, minden rendszerből távolítsa el a SuperFish-t és a SuperFish tanúsítványait.</Item>
+
+    <Item key="AboutThisTool">Ez a segédprogram hibákat keresve átvizsgálja a rendszert, és szükség esetén eltávolítja a SuperFish alkalmazást, a kapcsolódó beállításjegyzék-bejegyzéseket, fájlokat és biztonsági tanúsítványokat.</Item>
+    <Item key="UtilityName">A SuperFish eltávolítására szolgáló segédprogram</Item>
+    <Item key="SelectRemoveToStart">Az indításhoz válassza az „Eltávolítás” lehetőséget</Item>
+    <Item key="CloseWebBrowsers">A folytatás előtt zárjon be minden böngészőt</Item>
+    <Item key="Remove">Elemzés és a SuperFish eltávolítása</Item>
+    <Item key="LearnMoreText">Ide kattintva tudhat meg többet az eszközről</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">A SuperFish eltávolítása sikerült.   Azt javasoljuk indítsa újra a rendszert.</Item>
+    <Item key="OverallStatusError">Hiba:  Egy vagy több összetevőt nem sikerült eltávolítani.  Azt javasoljuk, hogy kövesse az alábbi, manuális eltávolítást ismertető tájékoztatót.</Item>
+    <Item key="OverallStatusNotOnSystem">Kész:  A SuperFish nem található a rendszerben. Nincs szükség további lépésekre.</Item>
+    <Item key="RestartNow">Újraindítás most</Item>
+    <Item key="RestartLater">Újraindítás később</Item>
+    <Item key="ResultFoundAndRemoved">Megtalálva és eltávolítva</Item>
+    <Item key="ResultFoundButNotRemoved">Megtalálva, de nem sikerült eltávolítani</Item>
+    <Item key="ResultNotFound">Nem található</Item>
+    <Item key="Error">Hiba</Item>
+    <Item key="MoreInformationText">További információk:</Item>
+    <Item key="ManualRemovalInstructionsText">A manuális eltávolítás lépései</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo-biztonsági útmutató</Item>
+    <Item key="LenovoStatementText">Lenovo-nyilatkozat</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovo licencszerződés</Item>
+  </ItemList>
+</LocalizationSet>

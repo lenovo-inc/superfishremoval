@@ -113,77 +113,87 @@ namespace SuperFishRemovalTool.Utilities
 
             if (System.IO.Directory.Exists(FirefoxProfilesDir))
             {
-                string logging = "  Mozilla profiles found, extracing tools...";
-
-                string TempExtractDir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval");
-                try
+                // Double-check for MSVCR100.dll
+                if (System.IO.File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SystemX86), "msvcr100.dll")) ||
+                    System.IO.File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "msvcr100.dll")) ||
+                    System.IO.File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "msvcr100.dll")))
                 {
-                    ExtractNSS(TempExtractDir);
-                }
-                catch (Exception ex)
-                {
-                    logging += "  Exception trying to extract Mozilla certutil - " + ex.ToString() + "  ";
-                }
-                finally
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, logging + "done");
-                }
+                    string logging = "  Mozilla profiles found, extracing tools...";
 
-                string certutilProgram = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval", "certutil.exe");
-
-                string[] FirefoxProfiles = System.IO.Directory.GetDirectories(FirefoxProfilesDir, "*.*", System.IO.SearchOption.TopDirectoryOnly);
-                foreach (string ProfileDir in FirefoxProfiles)
-                {
-                    string certutilArgs = null;
-                    if (remove)
-                    {
-                        certutilArgs = "-D -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
-                    }
-                    else
-                    {
-                        certutilArgs = "-L -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
-                    }
-
-                    logging = "  Mozilla - Running: " + certutilProgram + " " + certutilArgs;
-
-                    int certutilResult = -1;
+                    string TempExtractDir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval");
                     try
                     {
-                        certutilResult = ProcessStarter.StartWithoutWindow(certutilProgram, certutilArgs, true);
-
-                        // ToDo: Handle multiple profile directories
-                        if (0 == certutilResult)
-                        {
-                            result = true;
-                        }
+                        ExtractNSS(TempExtractDir);
                     }
                     catch (Exception ex)
                     {
-                        logging += "  Exception - " + ex.ToString();
+                        logging += "  Exception trying to extract Mozilla certutil - " + ex.ToString() + "  ";
                     }
                     finally
                     {
-                        Logging.Logger.Log(Logging.LogSeverity.Information, logging + "  Result = " + certutilResult);
+                        Logging.Logger.Log(Logging.LogSeverity.Information, logging + "done");
                     }
-                }
 
-                try
-                {
-                    System.Threading.Thread.Sleep(500);
-                    System.IO.Directory.Delete(TempExtractDir, true);
-                }
-                catch (Exception ex)
-                {
-                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Exception removing Mozilla tools - " + ex.ToString());
-                    // Just try again...
+                    string certutilProgram = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval", "certutil.exe");
+
+                    string[] FirefoxProfiles = System.IO.Directory.GetDirectories(FirefoxProfilesDir, "*.*", System.IO.SearchOption.TopDirectoryOnly);
+                    foreach (string ProfileDir in FirefoxProfiles)
+                    {
+                        string certutilArgs = null;
+                        if (remove)
+                        {
+                            certutilArgs = "-D -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
+                        }
+                        else
+                        {
+                            certutilArgs = "-L -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
+                        }
+
+                        logging = "  Mozilla - Running: " + certutilProgram + " " + certutilArgs;
+
+                        int certutilResult = -1;
+                        try
+                        {
+                            certutilResult = ProcessStarter.StartWithoutWindow(certutilProgram, certutilArgs, true);
+
+                            // ToDo: Handle multiple profile directories
+                            if (0 == certutilResult)
+                            {
+                                result = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            logging += "  Exception - " + ex.ToString();
+                        }
+                        finally
+                        {
+                            Logging.Logger.Log(Logging.LogSeverity.Information, logging + "  Result = " + certutilResult);
+                        }
+                    }
+
                     try
                     {
+                        System.Threading.Thread.Sleep(500);
                         System.IO.Directory.Delete(TempExtractDir, true);
                     }
-                    catch { }
-                }
+                    catch (Exception ex)
+                    {
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "  Exception removing Mozilla tools - " + ex.ToString());
+                        // Just try again...
+                        try
+                        {
+                            System.IO.Directory.Delete(TempExtractDir, true);
+                        }
+                        catch { }
+                    }
 
-                Logging.Logger.Log(Logging.LogSeverity.Information, "  Mozilla complete");
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "  Mozilla complete");
+                }
+                else
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Error, "  Skip Mozilla - Looks like MSVCR100.dll does not exist - cannot run certutil.exe");
+                }
             }
             else
             {

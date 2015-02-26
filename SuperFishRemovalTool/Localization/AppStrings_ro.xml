@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="ro">
+  <ItemList>
+    <Item key="DetectorNameApp">Aplicaţia Superfish</Item>
+    <Item key="DetectorNameReg">Intrări registry Superfish</Item>
+    <Item key="DetectorNameCert">Certificat rădăcină SuperFish</Item>
+    <Item key="DetectorNameFile">Fişiere SuperFish</Item>
+    <Item key="DetectorNameMozilla">Certificat rădăcină SuperFish pentru produsele Mozilla</Item>
+    <Item key="Version">Versiune</Item>
+    <Item key="AboutSuperfish">Aplicaţia SuperFish a fost preinstalată pe un grup limitat de notebookuri marca Lenovo începând cu luna septembrie 2014. Lenovo recomandă eliminarea aplicaţiei SuperFish şi a certificatelor SuperFish de pe toate sistemele.</Item>
+
+    <Item key="AboutThisTool">Acest utilitar va analiza în totalitate sistemul pentru a această problemă şi va elimina aplicaţia SuperFish, intrările de registry asociate, fişierele şi certificatele de securitate, dacă este necesar.</Item>
+    <Item key="UtilityName">Utilitar de eliminare a aplicaţiei SuperFish</Item>
+    <Item key="SelectRemoveToStart">Selectaţi „Eliminare” pentru a începe</Item>
+    <Item key="CloseWebBrowsers">Înainte de a continua, închideţi toate browserele</Item>
+    <Item key="Remove">Analizaţi şi eliminaţi SuperFish acum</Item>
+    <Item key="LearnMoreText">Faceţi clic aici pentru a afla mai multe despre acest instrument</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">SuperFish a fost eliminată de pe acest sistem.   Vă recomandăm să reporniţi sistemul.</Item>
+    <Item key="OverallStatusError">Eroare: nu am putut elimina una sau mai multe componente.  Vă recomandăm să urmaţi instrucţiunile de eliminare manuală de mai jos.</Item>
+    <Item key="OverallStatusNotOnSystem">Finalizare: SuperFish nu a fost găsită pe acest sistem. Nu este necesară nicio acţiune.</Item>
+    <Item key="RestartNow">Repornire imediată</Item>
+    <Item key="RestartLater">Repornire ulterioară</Item>
+    <Item key="ResultFoundAndRemoved">Găsită şi eliminată</Item>
+    <Item key="ResultFoundButNotRemoved">Găsită, dar neeliminată</Item>
+    <Item key="ResultNotFound">Negăsită</Item>
+    <Item key="Error">Eroare</Item>
+    <Item key="MoreInformationText">Informaţii suplimentare:</Item>
+    <Item key="ManualRemovalInstructionsText">Instrucţiuni de eliminare manuală</Item>
+    <Item key="LenovoSecurityAdvisoryText">Asistenţă securitate Lenovo</Item>
+    <Item key="LenovoStatementText">Declaraţie Lenovo</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Acordul de licenţă Lenovo</Item>
+  </ItemList>
+</LocalizationSet>

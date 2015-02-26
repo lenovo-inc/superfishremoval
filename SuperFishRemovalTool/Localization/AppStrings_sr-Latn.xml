@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="sr-Latn">
+  <ItemList>
+    <Item key="DetectorNameApp">Superfish апликација</Item>
+    <Item key="DetectorNameReg">Superfish уноси у регистар</Item>
+    <Item key="DetectorNameCert">SuperFish коренски сертификат</Item>
+    <Item key="DetectorNameFile">SuperFish датотеке</Item>
+    <Item key="DetectorNameMozilla">SuperFish коренски сертификат за Mozilla производе</Item>
+    <Item key="Version">Верзија</Item>
+    <Item key="AboutSuperfish">Апликација SuperFish је унапред инсталирана на ограниченој групи преносивих рачунара марке Lenovo почетком септембра 2014. Lenovo препоручује уклањање апликације SuperFish и SuperFish сертификата са свих система.</Item>
+
+    <Item key="AboutThisTool">Овај услужни програм ће у потпуности анализирати систем у вези са овим проблемом и уклонити SuperFish апликацију, повезане уносе у регистар, датотеке и сигурносне сертификате, уколико је потребно.</Item>
+    <Item key="UtilityName">Услужни програм за уклањање апликације SuperFish</Item>
+    <Item key="SelectRemoveToStart">Да бисте почели, изаберите „Уклони“</Item>
+    <Item key="CloseWebBrowsers">Затворите све прегледаче пре него што наставите</Item>
+    <Item key="Remove">Анализирај и уклони SuperFish одмах</Item>
+    <Item key="LearnMoreText">Кликните овде да бисте сазнали више о овом алату</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">Апликација SuperFish је уклоњена са система.   Препоручујемо вам да поново покренете систем.</Item>
+    <Item key="OverallStatusError">Грешка: нисмо могли да уклонимо једну компоненту или више њих.  Препоручујемо вам да пратите упутства за ручно уклањање у наставку.</Item>
+    <Item key="OverallStatusNotOnSystem">Завршено: апликација SuperFish није пронађена на систему и није потребно ништа радити.</Item>
+    <Item key="RestartNow">Поново покрени одмах</Item>
+    <Item key="RestartLater">Поново покрени касније</Item>
+    <Item key="ResultFoundAndRemoved">Пронађено и уклоњено</Item>
+    <Item key="ResultFoundButNotRemoved">Пронађено, али није уклоњено</Item>
+    <Item key="ResultNotFound">Није пронађено</Item>
+    <Item key="Error">Грешка</Item>
+    <Item key="MoreInformationText">Више информација:</Item>
+    <Item key="ManualRemovalInstructionsText">Упутства за ручно уклањање</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo саветник за безбедност</Item>
+    <Item key="LenovoStatementText">Lenovo изјава</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovo уговор о лиценцирању</Item>
+  </ItemList>
+</LocalizationSet>

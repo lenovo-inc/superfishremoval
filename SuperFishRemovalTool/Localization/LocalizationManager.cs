@@ -47,7 +47,7 @@ namespace SuperFishRemovalTool.Localization
         private static LocalizationSet LocateIdealTranslationFile(string translationFilePrefix)
         {
             LocalizationSet localizationSet = null;
-            var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            var currentUiCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
             var listOfTranslationFiles = GetLocalizationFilePaths();
             if(listOfTranslationFiles == null || !listOfTranslationFiles.Any())
             {
@@ -56,8 +56,8 @@ namespace SuperFishRemovalTool.Localization
 
             List<string> prioritizedLanguages = new List<string>()
             {
-                currentCulture.Name, // "en-US"
-                currentCulture.TwoLetterISOLanguageName, // "en"
+                currentUiCulture.Name, // "en-US"
+                currentUiCulture.TwoLetterISOLanguageName, // "en"
                 "en", // en is default
             };
 

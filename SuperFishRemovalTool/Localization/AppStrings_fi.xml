@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="fi">
+  <ItemList>
+    <Item key="DetectorNameApp">Superfish-sovellus</Item>
+    <Item key="DetectorNameReg">Superfish-sovelluksen rekisterimerkinnät</Item>
+    <Item key="DetectorNameCert">SuperFish-sovelluksen päävarmenne</Item>
+    <Item key="DetectorNameFile">SuperFish-sovelluksen tiedostot</Item>
+    <Item key="DetectorNameMozilla">SuperFish-sovelluksen päävarmenne Mozilla-tuotteille</Item>
+    <Item key="Version">Versio</Item>
+    <Item key="AboutSuperfish">SuperFish esiasennettiin tiettyihin Lenovon kannettaviin tietokoneisiin syyskuun 2014 jälkeen. Lenovo suosittelee SuperFish-sovelluksen ja SuperFish-varmenteiden poistamista kaikista järjestelmistä.</Item>
+
+    <Item key="AboutThisTool">Tämä apuohjelma analysoi järjestelmän kokonaan kyseisen ongelman osalta ja poistaa tarvittaessa SuperFish-sovelluksen, siihen liittyvät rekisterimerkinnät, tiedostot ja suojausvarmenteet.</Item>
+    <Item key="UtilityName">SuperFish Removal Utility -apuohjelma</Item>
+    <Item key="SelectRemoveToStart">Aloita valitsemalla Poista</Item>
+    <Item key="CloseWebBrowsers">Sulje kaikki selaimet ennen jatkamista</Item>
+    <Item key="Remove">Analysoi ja poista SuperFish nyt</Item>
+    <Item key="LearnMoreText">Saat lisätietoja tästä työkalusta napsauttamalla tätä</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">SuperFish poistettiin järjestelmästä.   Suosittelemme käynnistämään järjestelmän uudelleen.</Item>
+    <Item key="OverallStatusError">Virhe: Vähintään yhden komponentin poisto epäonnistui.  Suosittelemme noudattamaan alla olevia manuaalisen poiston ohjeita.</Item>
+    <Item key="OverallStatusNotOnSystem">Valmis: SuperFish-sovellusta ei löytynyt järjestelmästä. Toimia ei tarvita.</Item>
+    <Item key="RestartNow">Käynnistä uudelleen nyt</Item>
+    <Item key="RestartLater">Käynnistä uudelleen myöhemmin</Item>
+    <Item key="ResultFoundAndRemoved">Löydetty ja poistettu</Item>
+    <Item key="ResultFoundButNotRemoved">Löydetty muttei poistettu</Item>
+    <Item key="ResultNotFound">Ei löytynyt</Item>
+    <Item key="Error">Virhe</Item>
+    <Item key="MoreInformationText">Lisätietoja:</Item>
+    <Item key="ManualRemovalInstructionsText">Manuaalisen poiston ohjeet</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo Security Advisory</Item>
+    <Item key="LenovoStatementText">Lenovon ilmoitus</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovon käyttöoikeussopimus</Item>
+  </ItemList>
+</LocalizationSet>

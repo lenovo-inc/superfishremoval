@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="el">
+  <ItemList>
+    <Item key="DetectorNameApp">Εφαρμογή Superfish</Item>
+    <Item key="DetectorNameReg">Καταχωρήσεις μητρώου Superfish</Item>
+    <Item key="DetectorNameCert">Πιστοποιητικό ρίζας SuperFish</Item>
+    <Item key="DetectorNameFile">Αρχεία SuperFish</Item>
+    <Item key="DetectorNameMozilla">Πιστοποιητικό ρίζας SuperFish για προϊόντα Mozilla</Item>
+    <Item key="Version">Έκδοση</Item>
+    <Item key="AboutSuperfish">Η εφαρμογή SuperFish παρεχόταν προεγκατεστημένη σε ένα περιορισμένο σύνολο φορητών υπολογιστών της Lenovo από τον Σεπτέμβριο του 2014.  Η Lenovo συνιστά την κατάργηση της εφαρμογής SuperFish και των πιστοποιητικών SuperFish από όλα τα συστήματα.</Item>
+
+    <Item key="AboutThisTool">Αυτό το βοηθητικό πρόγραμμα θα αναλύσει πλήρως το σύστημά σας για να εντοπίσει το συγκεκριμένο πρόβλημα και θα καταργήσει την εφαρμογή SuperFish, τις σχετικές καταχωρήσεις μητρώου, τα αρχεία και τα πιστοποιητικά ασφαλείας, εφόσον είναι απαραίτητο.</Item>
+    <Item key="UtilityName">Βοηθητικό πρόγραμμα κατάργησης SuperFish</Item>
+    <Item key="SelectRemoveToStart">Επιλέξτε 'Κατάργηση' για να ξεκινήσετε</Item>
+    <Item key="CloseWebBrowsers">Κλείστε όλα τα προγράμματα περιήγησης προτού συνεχίσετε</Item>
+    <Item key="Remove">Ανάλυση και κατάργηση του SuperFish τώρα</Item>
+    <Item key="LearnMoreText">Κάντε κλικ εδώ, για να ενημερωθείτε για αυτό το εργαλείο</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">Η εφαρμογή SuperFish καταργήθηκε από αυτό το σύστημα.   Σας συνιστούμε να επανεκκινήσετε το σύστημά σας.</Item>
+    <Item key="OverallStatusError">Σφάλμα:  Δεν ήταν δυνατή η κατάργηση ενός ή περισσότερων στοιχείων.  Σας συνιστούμε να ακολουθήσετε τις παρακάτω οδηγίες χειροκίνητης κατάργησης.</Item>
+    <Item key="OverallStatusNotOnSystem">Ολοκληρώθηκε:  Δεν βρέθηκε η εφαρμογή SuperFish σε αυτό το σύστημα και δεν απαιτείται κάποια ενέργεια.</Item>
+    <Item key="RestartNow">Επανεκκίνηση τώρα</Item>
+    <Item key="RestartLater">Επανεκκίνηση αργότερα</Item>
+    <Item key="ResultFoundAndRemoved">Βρέθηκε και καταργήθηκε</Item>
+    <Item key="ResultFoundButNotRemoved">Βρέθηκε αλλά δεν καταργήθηκε</Item>
+    <Item key="ResultNotFound">Δεν βρέθηκε</Item>
+    <Item key="Error">Σφάλμα</Item>
+    <Item key="MoreInformationText">Περισσότερες πληροφορίες:</Item>
+    <Item key="ManualRemovalInstructionsText">Οδηγίες χειροκίνητης κατάργησης</Item>
+    <Item key="LenovoSecurityAdvisoryText">Συμβουλευτικές υπηρεσίες ασφαλείας της Lenovo</Item>
+    <Item key="LenovoStatementText">Δήλωση της Lenovo</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Σύμβαση άδειας χρήσης της Lenovo</Item>
+  </ItemList>
+</LocalizationSet>

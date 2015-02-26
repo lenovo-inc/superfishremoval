@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="it">
+  <ItemList>
+    <Item key="DetectorNameApp">Applicazione Superfish</Item>
+    <Item key="DetectorNameReg">Voci di registro Superfish</Item>
+    <Item key="DetectorNameCert">Certificato root SuperFish</Item>
+    <Item key="DetectorNameFile">File SuperFish</Item>
+    <Item key="DetectorNameMozilla">Certificato root SuperFish per prodotti Mozilla</Item>
+    <Item key="Version">Versione</Item>
+    <Item key="AboutSuperfish">A partire da settembre 2014, l'applicazione SuperFish è stata preinstallata su una serie limitata di notebook Lenovo. Lenovo consiglia di rimuovere SuperFish e i relativi certificati da tutti i sistemi.</Item>
+
+    <Item key="AboutThisTool">Questo programma di utilità analizzerà completamente il sistema e rimuoverà l'applicazione SuperFish e i relativi file, voci di registro e certificati di protezione.</Item>
+    <Item key="UtilityName">Utilità per la rimozione di SuperFish</Item>
+    <Item key="SelectRemoveToStart">Selezionare &quot;Rimuovi&quot; per iniziare</Item>
+    <Item key="CloseWebBrowsers">Chiudere tutti i browser prima di continuare</Item>
+    <Item key="Remove">Analizzare e rimuovere SuperFish ora</Item>
+    <Item key="LearnMoreText">Fare clic qui per ulteriori informazioni su questo strumento</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">L'applicazione SuperFish è stata rimossa da questo sistema.   Si consiglia di riavviare il sistema.</Item>
+    <Item key="OverallStatusError">Errore: impossibile rimuovere uno o più componenti.  Si consiglia di seguire le istruzioni per la rimozione manuale riportate di seguito.</Item>
+    <Item key="OverallStatusNotOnSystem">Completato: applicazione SuperFish non trovata in questo sistema. Nessuna azione necessaria.</Item>
+    <Item key="RestartNow">Riavvia adesso</Item>
+    <Item key="RestartLater">Riavvia in seguito</Item>
+    <Item key="ResultFoundAndRemoved">Trovata e rimossa</Item>
+    <Item key="ResultFoundButNotRemoved">Trovata ma non rimossa</Item>
+    <Item key="ResultNotFound">Non trovata</Item>
+    <Item key="Error">Errore</Item>
+    <Item key="MoreInformationText">Ulteriori informazioni:</Item>
+    <Item key="ManualRemovalInstructionsText">Istruzioni per la rimozione manuale</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo Security Advisory</Item>
+    <Item key="LenovoStatementText">Dichiarazione Lenovo</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Contratto di licenza Lenovo</Item>
+  </ItemList>
+</LocalizationSet>

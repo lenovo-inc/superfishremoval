@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="zh-Hans">
+  <ItemList>
+    <Item key="DetectorNameApp">Superfish 应用程序</Item>
+    <Item key="DetectorNameReg">Superfish 注册表项</Item>
+    <Item key="DetectorNameCert">SuperFish 根证书</Item>
+    <Item key="DetectorNameFile">SuperFish 文件</Item>
+    <Item key="DetectorNameMozilla">适用于 Mozilla 产品的 SuperFish 根证书</Item>
+    <Item key="Version">版本</Item>
+    <Item key="AboutSuperfish">自 2014 年 9 月起，少量 Lenovo 品牌笔记本电脑上预安装了 SuperFish。Lenovo 建议从所有系统中删除 SuperFish 以及 SuperFish 证书。</Item>
+
+    <Item key="AboutThisTool">此实用程序能够对您的系统进行全面分析，找到此问题并根据需要删除 SuperFish 应用程序、关联的注册表项、文件以及安全证书。</Item>
+    <Item key="UtilityName">SuperFish 删除实用程序</Item>
+    <Item key="SelectRemoveToStart">选择“删除”开始操作</Item>
+    <Item key="CloseWebBrowsers">请在继续之前关闭所有浏览器</Item>
+    <Item key="Remove">立即分析并删除 SuperFish</Item>
+    <Item key="LearnMoreText">单击此处了解此工具的信息</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">SuperFish 已从此系统中删除。建议您重新启动系统。</Item>
+    <Item key="OverallStatusError">错误：无法删除一个或多个组件。建议您按照下面的手动删除说明进行操作。</Item>
+    <Item key="OverallStatusNotOnSystem">完成：未在此系统上找到 SuperFish，无需执行任何操作。</Item>
+    <Item key="RestartNow">立即重新启动</Item>
+    <Item key="RestartLater">稍后重新启动</Item>
+    <Item key="ResultFoundAndRemoved">已找到并且已删除</Item>
+    <Item key="ResultFoundButNotRemoved">已找到但是未删除</Item>
+    <Item key="ResultNotFound">未找到</Item>
+    <Item key="Error">错误</Item>
+    <Item key="MoreInformationText">更多信息：</Item>
+    <Item key="ManualRemovalInstructionsText">手动删除说明</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo 安全顾问</Item>
+    <Item key="LenovoStatementText">Lenovo 声明</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovo 许可协议</Item>
+  </ItemList>
+</LocalizationSet>

@@ -144,6 +144,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\trashcan.ico" />
+    <EmbeddedResource Include="Localization\AppStrings_ar.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_cr.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_cs.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_da.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_de.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_el.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_es.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_fi.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_fr.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_hu.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_it.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_ja.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_ko.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_nb.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_nl.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_pl.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_pt.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_ro.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_ru.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_sk.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_sl.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_sr-Latn.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_sv.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_tr.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_zh-Hans.xml" />
+    <EmbeddedResource Include="Localization\AppStrings_zh-Hant.xml" />
     <EmbeddedResource Include="Localization\AppStrings_en.xml" />
     <EmbeddedResource Include="NSS\certutil.exe" />
     <EmbeddedResource Include="NSS\freebl3.dll" />

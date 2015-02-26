@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="sv">
+  <ItemList>
+    <Item key="DetectorNameApp">Programmet Superfish</Item>
+    <Item key="DetectorNameReg">Superfish-registerposter</Item>
+    <Item key="DetectorNameCert">SuperFish-rotcertifikat</Item>
+    <Item key="DetectorNameFile">SuperFish-filer</Item>
+    <Item key="DetectorNameMozilla">SuperFish-rotcertifikat för Mozilla-produkter</Item>
+    <Item key="Version">Version</Item>
+    <Item key="AboutSuperfish">SuperFish förinstallerades på ett begränsat antal bärbara Lenovo-datorer från september 2014. Lenovo rekommenderar att SuperFish och SuperFish-certifikaten tas bort från alla system.</Item>
+
+    <Item key="AboutThisTool">Det här verktyget analyserar ditt system och tar bort SuperFish-programmet, associerade registerposter, filer och säkerhetscertifikat, om det behövs.</Item>
+    <Item key="UtilityName">SuperFish-borttagningsverktyg</Item>
+    <Item key="SelectRemoveToStart">Börja genom att välja Ta bort</Item>
+    <Item key="CloseWebBrowsers">Stäng alla webbläsare innan du fortsätter</Item>
+    <Item key="Remove">Analysera och ta bort SuperFish nu</Item>
+    <Item key="LearnMoreText">Klicka här om du vill veta mer om verktyget</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">SuperFish togs bort från systemet.   Vi rekommenderar att du startar om datorn.</Item>
+    <Item key="OverallStatusError">Fel: Det gick inte att ta bort en eller flera komponenter.  Vi rekommenderar att du följer anvisningarna för manuell borttagning nedan.</Item>
+    <Item key="OverallStatusNotOnSystem">Klart: SuperFish hittades inte på datorn och ingen åtgärd krävs.</Item>
+    <Item key="RestartNow">Starta om nu</Item>
+    <Item key="RestartLater">Starta om senare</Item>
+    <Item key="ResultFoundAndRemoved">Hittat och borttaget</Item>
+    <Item key="ResultFoundButNotRemoved">Hittat men inte borttaget</Item>
+    <Item key="ResultNotFound">Inte hittat</Item>
+    <Item key="Error">Fel</Item>
+    <Item key="MoreInformationText">Mer information:</Item>
+    <Item key="ManualRemovalInstructionsText">Anvisningar för manuell borttagning</Item>
+    <Item key="LenovoSecurityAdvisoryText">Säkerhetsråd från Lenovo</Item>
+    <Item key="LenovoStatementText">Lenovo-information</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovos licensavtal</Item>
+  </ItemList>
+</LocalizationSet>

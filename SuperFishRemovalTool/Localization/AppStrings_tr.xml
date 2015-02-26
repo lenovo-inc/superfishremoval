@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="tr">
+  <ItemList>
+    <Item key="DetectorNameApp">Superfish Uygulaması</Item>
+    <Item key="DetectorNameReg">Superfish Kayıt girişleri</Item>
+    <Item key="DetectorNameCert">SuperFish Kök Sertifikası</Item>
+    <Item key="DetectorNameFile">SuperFish Dosyaları</Item>
+    <Item key="DetectorNameMozilla">Mozilla ürünleri için SuperFish Kök Sertifikası</Item>
+    <Item key="Version">Sürüm</Item>
+    <Item key="AboutSuperfish">2014 yılının Eylül ayından itibaren Lenovo markalı sınırlı sayıda dizüstü bilgisayara SuperFish önceden yüklenmiştir. Lenovo, tüm sistemlerden SuperFish'in ve SuperFish sertifikalarının kaldırılmasını önermektedir.</Item>
+
+    <Item key="AboutThisTool">Bu yardımcı program, sorun için sisteminizi bütünüyle analiz edecek ve gerekiyorsa SuperFish uygulamasını, ilişkili kayıt girişlerini, dosyaları ve güvenlik sertifikalarını kaldıracaktır.</Item>
+    <Item key="UtilityName">SuperFish Kaldırma Yardımcı Programı</Item>
+    <Item key="SelectRemoveToStart">Başlamak için 'Kaldır' seçeneğini belirleyin</Item>
+    <Item key="CloseWebBrowsers">Devam etmeden önce lütfen tüm tarayıcı pencerelerini kapatın</Item>
+    <Item key="Remove">SuperFish'i Hemen Analiz Et ve Kaldır</Item>
+    <Item key="LearnMoreText">Bu araç hakkında bilgi edinmek için burayı tıklayın</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">SuperFish, bu sistemden kaldırıldı.   Sisteminizi yeniden başlatmanızı öneriyoruz.</Item>
+    <Item key="OverallStatusError">Hata: Bir veya birden fazla bileşeni kaldıramadık.  Aşağıdaki manuel kaldırma talimatlarını uygulamanızı öneriyoruz.</Item>
+    <Item key="OverallStatusNotOnSystem">Tamamlandı: Bu sistemde SuperFish bulunmadı, işlem yapmanız gerekmiyor.</Item>
+    <Item key="RestartNow">Şimdi yeniden başlat</Item>
+    <Item key="RestartLater">Daha sonra yeniden başlat</Item>
+    <Item key="ResultFoundAndRemoved">Bulundu ve kaldırıldı</Item>
+    <Item key="ResultFoundButNotRemoved">Bulundu ancak kaldırılmadı</Item>
+    <Item key="ResultNotFound">Bulunmadı</Item>
+    <Item key="Error">Hata</Item>
+    <Item key="MoreInformationText">Ek bilgi:</Item>
+    <Item key="ManualRemovalInstructionsText">Manuel Kaldırma Talimatları</Item>
+    <Item key="LenovoSecurityAdvisoryText">Lenovo Güvenlik Önerileri</Item>
+    <Item key="LenovoStatementText">Lenovo Bildirimi</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Lenovo Lisans Sözleşmesi</Item>
+  </ItemList>
+</LocalizationSet>

@@ -28,7 +28,7 @@ namespace SuperFishRemovalTool
             //Logger.AddLogger(new Logging.FileLogger());
 
             // Run in silent, console mode if requested
-            if ((0 < args.Length) && (0 == String.Compare("/silent", args[0], true, System.Globalization.CultureInfo.InvariantCulture)))
+            if (0 < args.Length)
             {
                 // Redirect console output to parent process - Must be before any calls to Console.WriteLine ()                
                 if (!AttachConsole(-1))  // ATTACH_PARENT_PROCESS = -1
@@ -36,7 +36,19 @@ namespace SuperFishRemovalTool
                     AllocConsole();
                 }
 
-                ExitCode = SilentMode();
+                if (0 == String.Compare("/silent", args[0], true, System.Globalization.CultureInfo.InvariantCulture))
+                {
+                    ExitCode = SilentMode();
+                }
+                else if (0 == String.Compare("/exist", args[0], true, System.Globalization.CultureInfo.InvariantCulture))
+                {
+                    ExitCode = SilentMode(true);
+                }
+                else
+                {
+                    Logger.Log(Logging.LogSeverity.Information, "Switches supported are /silent and /exist");
+                    ExitCode = 0;
+                }
             }
             else
             {
@@ -48,11 +60,18 @@ namespace SuperFishRemovalTool
             return ExitCode;
         }
 
-        static int SilentMode()
+        static int SilentMode(bool DetectOnly = false)
         {
             int ExitCode = 0;
 
-            Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check");
+            if (DetectOnly)
+            {
+                Logger.Log(Logging.LogSeverity.Information, "Superfish Detection Check");
+            }
+            else
+            {
+                Logger.Log(Logging.LogSeverity.Information, "Superfish Removal Check");
+            }
 
             var agents = Utilities.RemovalAgentFactory.GetRemovalAgents().ToList();
             if (agents != null && agents.Any())
@@ -72,20 +91,28 @@ namespace SuperFishRemovalTool
                     {
                         logAgentInfo("Working...");
 
-                        Utilities.FixResult removalResult = agent.RemoveItem();
+                        Utilities.FixResult removalResult = agent.RemoveItem(DetectOnly);
                         if (removalResult.DidFail)
                         {
                             logAgentError("Error, failed while detecting / removing");
                         }
                         else if (removalResult.DidExist)
                         {
-                            if (removalResult.WasRemoved)
+                            if ((!DetectOnly) && removalResult.WasRemoved)
                             {
                                 logAgentInfo("Found and removed");
                             }
                             else
                             {
-                                logAgentError("Found BUT NOT removed");
+                                if (DetectOnly)
+                                {
+                                    logAgentError("Found");
+                                }
+                                else
+                                {
+                                    logAgentError("Found BUT NOT removed");
+                                }
+
                                 // Error code should be the first error that occurs. 
                                 ExitCode = (0 == ExitCode) ? agentNumber : ExitCode;
                             }

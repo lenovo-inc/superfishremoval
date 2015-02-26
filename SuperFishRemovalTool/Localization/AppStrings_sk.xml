@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalizationSet language="sk">
+  <ItemList>
+    <Item key="DetectorNameApp">Aplikácia Superfish</Item>
+    <Item key="DetectorNameReg">Položky aplikácie Superfish v databáze Registry</Item>
+    <Item key="DetectorNameCert">Koreňový certifikát aplikácie SuperFish</Item>
+    <Item key="DetectorNameFile">Súbory aplikácie SuperFish</Item>
+    <Item key="DetectorNameMozilla">Koreňový certifikát aplikácie SuperFish pre produkty Mozilla</Item>
+    <Item key="Version">Verzia</Item>
+    <Item key="AboutSuperfish">Aplikácia SuperFish bola predinštalovaná do obmedzenej skupiny prenosných počítačov Lenovo od septembra 2014. Spoločnosť Lenovo odporúča odstrániť aplikáciu SuperFish a certifikáty SuperFish zo všetkých systémov.</Item>
+
+    <Item key="AboutThisTool">Tento nástroj zanalyzuje tento problém v celom vašom systéme a v prípade potreby odstráni aplikáciu SuperFish a súvisiace položky v databáze Registry, súbory a certifikáty zabezpečenia.</Item>
+    <Item key="UtilityName">Nástroj na odstránenie aplikácie SuperFish</Item>
+    <Item key="SelectRemoveToStart">Začnite výberom možnosti „Odstrániť“</Item>
+    <Item key="CloseWebBrowsers">Skôr ako budete pokračovať, zatvorte všetky prehľadávače</Item>
+    <Item key="Remove">Analyzovať a odstrániť aplikáciu SuperFish</Item>
+    <Item key="LearnMoreText">Kliknutím sem zobrazíte informácie o tomto nástroji</Item>
+    <Item key="LearnMoreLocation">http://forums.lenovo.com/t5/Lenovo-P-Y-and-Z-series/Removal-Instructions-for-VisualDiscovery-Superfish-application/ta-p/2029206</Item>
+    <Item key="RemovalCompleteMessage"></Item>
+    <Item key="OverallStatusAppRemoved">Aplikácia SuperFish sa odstránila z tohto systému.   Odporúčame reštartovať systém.</Item>
+    <Item key="OverallStatusError">Chyba: Jeden alebo viacero komponentov sa nedalo odstrániť.  Odporúčame postupovať podľa pokynov na manuálne odstránenie uvedených nižšie.</Item>
+    <Item key="OverallStatusNotOnSystem">Dokončené: Aplikácia SuperFish sa v tomto systéme nenašla. Nie je potrebná žiadna akcia.</Item>
+    <Item key="RestartNow">Reštartovať teraz</Item>
+    <Item key="RestartLater">Reštartovať neskôr</Item>
+    <Item key="ResultFoundAndRemoved">Nájdená a odstránená</Item>
+    <Item key="ResultFoundButNotRemoved">Nájdená, ale neodstránená</Item>
+    <Item key="ResultNotFound">Nenájdená</Item>
+    <Item key="Error">Chyba</Item>
+    <Item key="MoreInformationText">Ďalšie informácie:</Item>
+    <Item key="ManualRemovalInstructionsText">Pokyny na manuálne odstránenie</Item>
+    <Item key="LenovoSecurityAdvisoryText">Informácie o zabezpečení od spoločnosti Lenovo</Item>
+    <Item key="LenovoStatementText">Vyhlásenie spoločnosti Lenovo</Item>
+    <Item key="LenovoStatementLink">http://news.lenovo.com/article_display.cfm?article_id=1929</Item>
+    <Item key="ManualRemovalInstructionsLink">http://support.lenovo.com/us/en/product_security/superfish_uninstall</Item>
+    <Item key="LenovoSecurityAdvisoryLink">http://support.lenovo.com/us/en/product_security/superfish</Item>
+    <Item key="LicenseAgreementLink">http://support.lenovo.com/us/en/documents/ht100141</Item>
+    <Item key="LicenseAgreementText">Licenčná zmluva spoločnosti Lenovo</Item>
+  </ItemList>
+</LocalizationSet>

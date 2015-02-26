@@ -11,7 +11,7 @@ namespace SuperFishRemovalTool.Utilities
         /// <remarks></remarks>
         /// <param name="superfishDetector">The utility to use</param>
         /// <returns>The result of the removal</returns>
-        public static FixResult RemoveItem(this ISuperfishDetector superfishDetector)
+        public static FixResult RemoveItem(this ISuperfishDetector superfishDetector, bool DetectExistenceOnly = false)
         {
             if (superfishDetector == null)
                 throw new ArgumentNullException("superfishDetector");
@@ -37,9 +37,17 @@ namespace SuperFishRemovalTool.Utilities
             try
             {
                 result.DidExist = superfishDetector.DoesExist();
+
                 //TODO: This functionality should be discussed, 
                 //Performing a removal if nothing was found strikes me as odd.
-                result.WasRemoved = superfishDetector.Remove();
+                if (DetectExistenceOnly)
+                {
+                    result.WasRemoved = false;
+                }
+                else
+                {
+                    result.WasRemoved = superfishDetector.Remove();
+                }
             }
             catch (Exception)
             {
