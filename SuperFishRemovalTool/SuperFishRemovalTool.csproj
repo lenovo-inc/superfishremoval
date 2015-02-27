@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\trashcan.ico" />
+    <EmbeddedResource Include="Localization\AppStrings_pt-BR.xml" />
     <EmbeddedResource Include="Localization\AppStrings_ar.xml" />
     <EmbeddedResource Include="Localization\AppStrings_cr.xml" />
     <EmbeddedResource Include="Localization\AppStrings_cs.xml" />
