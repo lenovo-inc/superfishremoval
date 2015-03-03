@@ -31,6 +31,7 @@ namespace SuperFishRemovalTool
                 if(processlist != null && processlist.Any())
                 {
                     isAnyRunning = true;
+                    break;
                 }
             }
             return isAnyRunning;

@@ -13,7 +13,8 @@ namespace SuperFishRemovalTool.Logging
             string fullText = String.Format("Severity: {0}, \t\t Message: {1}", severity, message);
             //Console.WriteLine(String.Format("Date: {0:d/M/yyyy HH:mm:ss}", DateTime.Now));
             Console.WriteLine(fullText);
-            Console.WriteLine("============================================================");
+            // Please make it stop
+            //Console.WriteLine("============================================================");
         }
 
         public void Log(Exception ex, string message)
@@ -23,7 +24,8 @@ namespace SuperFishRemovalTool.Logging
                 //Console.WriteLine(String.Format("Date: {0:d/M/yyyy HH:mm:ss}", DateTime.Now));
                 Console.WriteLine(String.Format("Exception: {0}, {1}", ex.GetType(), ex.Message));
                 Console.WriteLine(String.Format("Message: {0}", message));
-                Console.WriteLine("============================================================");
+                // Please make it stop
+                //Console.WriteLine("============================================================");
             }
         }
     }

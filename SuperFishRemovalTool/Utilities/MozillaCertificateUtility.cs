@@ -95,23 +95,43 @@ namespace SuperFishRemovalTool.Utilities
             return retValue;
         }
 
-        /*
-        private bool IsSuperfishCert(System.Security.Cryptography.X509Certificates.X509Certificate2 cert)
-        {
-            string Issuer = cert.Issuer;
-            string IssuerName = cert.IssuerName.Name;
-
-            return ((Issuer.ToLower().Contains("superfish, inc")) || (IssuerName.ToLower().Contains("superfish, inc")));
-        }
-        */
 
         private bool HandleMozilla(string MainDir, bool remove = false)
         {
             bool result = false;
 
-            string FirefoxProfilesDir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), MainDir);
+            // Build a list of directories to check for ALL users on the local system
+            List<string> FirefoxProfilesDirs = new List<string>();
+            string allUsersDirectory = System.IO.Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)).FullName;
+            string[] userDirectories = System.IO.Directory.GetDirectories(allUsersDirectory);
+            foreach (string userDirectory in userDirectories)
+            {
+                string userAppDataDirectory = System.IO.Path.Combine(allUsersDirectory, userDirectory, "AppData");
+                if (System.IO.Directory.Exists(userAppDataDirectory))
+                {
+                    string[] userLocalRoamingDirectories = System.IO.Directory.GetDirectories(userAppDataDirectory);
+                    foreach (string userLocalRoamingDirectory in userLocalRoamingDirectories)
+                    {
+                        string firefoxProfilesDir = System.IO.Path.Combine(userAppDataDirectory, userLocalRoamingDirectory, MainDir);
+                        if (System.IO.Directory.Exists(firefoxProfilesDir))
+                        {
+                            FirefoxProfilesDirs.Add(firefoxProfilesDir);
+                        }
+                    }
+                }
+            }
+            // Just to be safe - Add original directory as well
+            string MainAppdataDir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), MainDir);
+            if (System.IO.Directory.Exists(MainAppdataDir))
+            {
+                if (! FirefoxProfilesDirs.Contains(MainAppdataDir))
+                {
+                    FirefoxProfilesDirs.Add(MainAppdataDir);
+                }
+            }            
 
-            if (System.IO.Directory.Exists(FirefoxProfilesDir))
+
+            if ((null != FirefoxProfilesDirs) && (0 < FirefoxProfilesDirs.Count))
             {
                 // Double-check for MSVCR100.dll
                 if (System.IO.File.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.SystemX86), "msvcr100.dll")) ||
@@ -136,39 +156,22 @@ namespace SuperFishRemovalTool.Utilities
 
                     string certutilProgram = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "SuperfishRemoval", "certutil.exe");
 
-                    string[] FirefoxProfiles = System.IO.Directory.GetDirectories(FirefoxProfilesDir, "*.*", System.IO.SearchOption.TopDirectoryOnly);
-                    foreach (string ProfileDir in FirefoxProfiles)
+                    foreach (string FirefoxProfilesDir in FirefoxProfilesDirs)
                     {
-                        string certutilArgs = null;
-                        if (remove)
+                        string[] FirefoxProfiles = System.IO.Directory.GetDirectories(FirefoxProfilesDir, "*.*", System.IO.SearchOption.TopDirectoryOnly);
+                        foreach (string ProfileDir in FirefoxProfiles)
                         {
-                            certutilArgs = "-D -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
-                        }
-                        else
-                        {
-                            certutilArgs = "-L -n \"Superfish, Inc.\" -d \"" + ProfileDir + "\"";
-                        }
-
-                        logging = "  Mozilla - Running: " + certutilProgram + " " + certutilArgs;
-
-                        int certutilResult = -1;
-                        try
-                        {
-                            certutilResult = ProcessStarter.StartWithoutWindow(certutilProgram, certutilArgs, true);
-
-                            // ToDo: Handle multiple profile directories
-                            if (0 == certutilResult)
+                            if (0 == RunCertutil(certutilProgram, ProfileDir, "Superfish, Inc.", remove))
                             {
                                 result = true;
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            logging += "  Exception - " + ex.ToString();
-                        }
-                        finally
-                        {
-                            Logging.Logger.Log(Logging.LogSeverity.Information, logging + "  Result = " + certutilResult);
+                            else
+                            {
+                                if (0 == RunCertutil(certutilProgram, ProfileDir, "Superfish, Inc. - Superfish, Inc.", remove))
+                                {
+                                    result = true;
+                                }
+                            }
                         }
                     }
 
@@ -192,16 +195,92 @@ namespace SuperFishRemovalTool.Utilities
                 }
                 else
                 {
-                    Logging.Logger.Log(Logging.LogSeverity.Error, "  Skip Mozilla - Looks like MSVCR100.dll does not exist - cannot run certutil.exe");
+                    if (! remove)
+                    {
+                        // This is a weird hack - but we cannot run the NSS cerutil.exe tool - so try to look inside the certificate store instead
+                        // This only works for DETECTION, not removal
+                        foreach (string FirefoxProfilesDir in FirefoxProfilesDirs)
+                        {
+                            string[] FirefoxProfiles = System.IO.Directory.GetDirectories(FirefoxProfilesDir, "*.*", System.IO.SearchOption.TopDirectoryOnly);
+                            foreach (string ProfileDir in FirefoxProfiles)
+                            {
+                                string certificateFilePath = System.IO.Path.Combine(ProfileDir, "cert8.db");
+                                if (System.IO.File.Exists(certificateFilePath))
+                                {
+                                    // Reads in the entire file as a string and checks for references
+                                    using (System.IO.StreamReader sr = new System.IO.StreamReader(certificateFilePath))
+                                    {
+                                        string fileContents = sr.ReadToEnd();
+                                        // If "0" occurences of "superfish" are found - then cert was never installed
+                                        // Apparently, if "17" occurences are found - then it IS installed
+                                        // However, if only "16" are found - then it WAS installed, but it's not anymore?!?
+                                        // Remember - this is just a backup hack in case NSS certutil.exe is not able to run
+                                        int superfishCount = System.Text.RegularExpressions.Regex.Matches(fileContents.ToLower(), "superfish").Count;
+                                        if (17 == superfishCount)
+                                        {
+                                            result = true;
+                                            Logging.Logger.Log(Logging.LogSeverity.Information, "  Mozilla - Unable to run certutil.exe - FOUND Superfish certificate in " + certificateFilePath);
+                                        }
+                                        else if (0 == superfishCount)
+                                        {
+                                            Logging.Logger.Log(Logging.LogSeverity.Information, "  Mozilla - Unable to run certutil.exe - Superfish certificate NOT found in " + certificateFilePath);
+                                        }
+                                        else
+                                        {
+                                            Logging.Logger.Log(Logging.LogSeverity.Information, "  Mozilla - Unable to run certutil.exe - Superfish certificate found but REMOVED (" + superfishCount.ToString() + ") in " + certificateFilePath);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Logging.Logger.Log(Logging.LogSeverity.Error, "  Mozilla Error - Looks like MSVCR100.dll does not exist - cannot run certutil.exe to remove certificate");
+                    }
                 }
             }
             else
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "  Skip Mozilla - Does not look like Profiles directory exists");
+                Logging.Logger.Log(Logging.LogSeverity.Information, "  Skip Mozilla - Does not look like Profiles directories exists");
             }
 
             return result;
         }
+
+
+        private int RunCertutil(string certutilProgram, string ProfileDir, string certName, bool remove = false)
+        {
+            int certutilResult = -1;
+
+            string certutilArgs = null;
+            if (remove)
+            {
+                certutilArgs = "-D -n \"" + certName + "\" -d \"" + ProfileDir + "\"";
+            }
+            else
+            {
+                certutilArgs = "-L -n \"" + certName + "\" -d \"" + ProfileDir + "\"";
+            }
+
+            string logging = "  Mozilla - Running: " + certutilProgram + " " + certutilArgs;
+            
+            try
+            {
+                certutilResult = ProcessStarter.StartWithoutWindow(certutilProgram, certutilArgs, true);
+            }
+            catch (Exception ex)
+            {
+                logging += "  Exception - " + ex.ToString();
+            }
+            finally
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Information, logging + "  Result = " + certutilResult);
+            }
+
+            return certutilResult;
+        }
+
 
         private void ExtractNSS(string TempExtractDir)
         {

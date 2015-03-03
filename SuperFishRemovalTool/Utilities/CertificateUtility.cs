@@ -83,22 +83,5 @@ namespace SuperFishRemovalTool.Utilities
             return ( (Issuer.ToLowerInvariant().Contains("superfish, inc")) || (IssuerName.ToLowerInvariant().Contains("superfish, inc")) );
         }
 
-        private void CopyStream(System.IO.Stream input, System.IO.Stream output)
-        {
-            byte[] buffer = new byte[32768];
-
-            while (true)
-            {
-                int read = input.Read(buffer, 0, buffer.Length);
-
-                if (read <= 0)
-                {
-                    return;
-                }
-
-                output.Write(buffer, 0, read);
-            }
-        }
-
     }
 }
