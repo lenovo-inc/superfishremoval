@@ -29,6 +29,10 @@ MPL 1.1
    * %SystemRoot%\SysWOW64\VisualDiscovery.ini
    * %SystemRoot%\SysWOW64\VisualDiscoveryOff.ini
    * %SystemRoot%\System32\VisualDiscoveryOff.ini
+   * %SystemRoot%\System32\VDWFP.sys
+   * %SystemRoot%\System32\VDWFP64.sys
+   * %SystemRoot%\SysWOW64\DWFP.sys
+   * %SystemRoot%\SysWOW64\DWFP64.sys
    * %TEMP%\VisualDiscoveryr.log
 
 This tool can be run from command line.  From an Admin CMD prompt and run the following:

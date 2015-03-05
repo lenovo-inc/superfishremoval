@@ -19,6 +19,8 @@ namespace SuperFishRemovalTool
                     "iexplore",
                     "opera",
                     "safari",
+                    "Maxthon",
+                    "liebao", // "Cheetah fast browser", liebao.cn
                 };
             }
         }

@@ -34,6 +34,10 @@ namespace SuperFishRemovalTool.Utilities
             {
                 bool ProblemDeletingFile = false;
 
+                // Try to stop/kill AND remove Superfish services and processes (so that the files can be deleted)
+                ApplicationUtility.StopAllSuperfishProcesses();
+                ApplicationUtility.RemoveAllSuperfishServices();
+
                 Logging.Logger.Log(Logging.LogSeverity.Information, "Deleting Superfish files: ");
                 foreach (string file in allfiles)
                 {
@@ -47,16 +51,23 @@ namespace SuperFishRemovalTool.Utilities
                             {
                                 ProblemDeletingFile = true;
                                 Logging.Logger.Log(Logging.LogSeverity.Error, "  Error deleting " + file);
+                                System.IO.Directory.Delete(file, true);
                             }
                         }
-                        else
+                        else if (System.IO.File.Exists(file))
                         {
                             System.IO.File.Delete(file);
                             if (System.IO.File.Exists(file))
                             {
                                 ProblemDeletingFile = true;
                                 Logging.Logger.Log(Logging.LogSeverity.Error, "  Error deleting " + file);
+                                System.IO.File.Delete(file);
                             }
+                        }
+                        else
+                        {
+                            // In case duplicate files were added to the list and removed earlier
+                            Logging.Logger.Log(Logging.LogSeverity.Information, "  Already deleted " + file);
                         }
                     }
                     catch (Exception ex)
@@ -140,6 +151,8 @@ namespace SuperFishRemovalTool.Utilities
 
             string[] SystemFiles = null;
             string[] SYSWOWFiles = null;
+            string[] SysDriver = null, SysDriver64 = null;
+            string[] SYSWOWDriver = null, SYSWOWDriver64 = null;
             try
             {
                 SystemFiles = System.IO.Directory.GetFiles(
@@ -151,11 +164,36 @@ namespace SuperFishRemovalTool.Utilities
                     System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64"),
                     "VisualDiscovery*.ini",
                     System.IO.SearchOption.AllDirectories);
+
+                SysDriver = System.IO.Directory.GetFiles(
+                    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32"),
+                    "VDWFP.sys",
+                    System.IO.SearchOption.AllDirectories);
+
+                SysDriver64 = System.IO.Directory.GetFiles(
+                    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32"),
+                    "VDWFP64.sys",
+                    System.IO.SearchOption.AllDirectories);
+
+                SYSWOWDriver = System.IO.Directory.GetFiles(
+                    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64"),
+                    "VDWFP.sys",
+                    System.IO.SearchOption.AllDirectories);
+
+                SYSWOWDriver64 = System.IO.Directory.GetFiles(
+                    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64"),
+                    "VDWFP64.sys",
+                    System.IO.SearchOption.AllDirectories);
             }
             catch
             {
                 SystemFiles = FindAllFiles(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32"), "VisualDiscovery*.ini");
                 SYSWOWFiles = FindAllFiles(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64"), "VisualDiscovery*.ini");
+
+                SysDriver = FindAllFiles(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32"), "VDWFP.sys");
+                SysDriver64 = FindAllFiles(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32"), "VDWFP64.sys");
+                SYSWOWDriver = FindAllFiles(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64"), "VDWFP.sys");
+                SYSWOWDriver64 = FindAllFiles(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64"), "VDWFP64.sys");
             }
 
             string[] UserFiles = null;
@@ -192,6 +230,23 @@ namespace SuperFishRemovalTool.Utilities
             if ((null != SYSWOWFiles) && (0 < SYSWOWFiles.Length))
             {
                 AllFiles.AddRange(SYSWOWFiles);
+            }
+
+            if ((null != SysDriver) && (0 < SysDriver.Length))
+            {
+                AllFiles.AddRange(SysDriver);
+            }
+            if ((null != SysDriver64) && (0 < SysDriver64.Length))
+            {
+                AllFiles.AddRange(SysDriver64);
+            }
+            if ((null != SYSWOWDriver) && (0 < SYSWOWDriver.Length))
+            {
+                AllFiles.AddRange(SYSWOWDriver);
+            }
+            if ((null != SYSWOWDriver64) && (0 < SYSWOWDriver64.Length))
+            {
+                AllFiles.AddRange(SYSWOWDriver64);
             }
 
             if ((null != UserFiles) && (0 < UserFiles.Length))

@@ -176,23 +176,16 @@ namespace SuperFishRemovalTool
             switch (result)
             {
                 case OverallResult.None:
-                    goto case OverallResult.Error;
-
-                case OverallResult.NoItemsFound:
-                    newText = stringTable.OverallStatusNotOnSystem;
-                    break;
-
-                case OverallResult.ItemsFoundAndRemoved:
-                    newText = stringTable.OverallStatusAppRemoved;
-                    break;
-
                 case OverallResult.ItemsFoundButNotRemoved:
-                    goto case OverallResult.Error;
-
                 case OverallResult.Error:
                     newText = stringTable.OverallStatusError;
                     break;
-
+                case OverallResult.NoItemsFound:
+                    newText = stringTable.OverallStatusNotOnSystem;
+                    break;
+                case OverallResult.ItemsFoundAndRemoved:
+                    newText = stringTable.OverallStatusAppRemoved;
+                    break;
                 default:
                     break;
             }
@@ -307,7 +300,6 @@ namespace SuperFishRemovalTool
                         OverallResult overallResult = OverallResult.None;
                         var stringTable = Localization.LocalizationManager.Get();
 
-
                         var agents = Utilities.RemovalAgentFactory.GetRemovalAgents().ToList();
                         if(agents != null && agents.Any())
                         {
@@ -316,9 +308,10 @@ namespace SuperFishRemovalTool
                                 try
                                 {
                                     double percentageComplete = ( (double)(agents.IndexOf(agent) + 1) / (double)agents.Count) * 100;
-                                    var removalResult = TryToExecuteRemoval(agent);
+                                    FixResult removalResult = TryToExecuteRemoval(agent);
                                     bgWorker.ReportProgress(Convert.ToInt32(percentageComplete), removalResult);
-                                    overallResult = CalculateSingleResult(removalResult);
+                                    OverallResult thisResult = CalculateSingleResult(removalResult);
+                                    overallResult = CalculateMergedResult(overallResult, thisResult);
                                     System.Threading.Thread.Sleep(1000); // Some of the agents perform very quickly.  Slow it down to show each step
                                 }
                                 catch(Exception ex)
@@ -516,7 +509,9 @@ namespace SuperFishRemovalTool
             {
                 if (fixResult.DidExist)
                 {
-                    result = fixResult.WasRemoved ? OverallResult.ItemsFoundAndRemoved : OverallResult.ItemsFoundButNotRemoved;
+                    result = fixResult.WasRemoved ? 
+                        OverallResult.ItemsFoundAndRemoved :
+                        OverallResult.ItemsFoundButNotRemoved;
                 }
                 else
                 {

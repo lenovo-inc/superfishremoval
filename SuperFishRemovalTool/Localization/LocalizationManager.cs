@@ -47,7 +47,38 @@ namespace SuperFishRemovalTool.Localization
         private static LocalizationSet LocateIdealTranslationFile(string translationFilePrefix)
         {
             LocalizationSet localizationSet = null;
-            var currentUiCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+
+            string currentCultureName = currentCulture.Name;
+            var languageMapping = new Dictionary<String, List<String>>()
+            {
+                {"zh-Hans", new List<string>()
+                {
+                    "zh", "zh-CHS", "zh-CHT", "zh-CN", "zh-SG",
+                }},
+
+                {"zh-Hant", new List<string>()
+                {
+                    "zh-HK", "zh-MO", "zh-TW",
+                }},
+
+                {"sr-Latn", new List<string>()
+                {
+                    "sr-Latn-RS", "sr-Cyrl-RS", "sr-Latn-ME", "sr-Cyrl-ME",
+                }},
+            };
+
+            // Map "zh-CHS" to "zh-HANS"
+            foreach(var mapping in languageMapping)
+            {
+                if(mapping.Value.Contains(currentCultureName, StringComparer.InvariantCultureIgnoreCase))
+                {
+                    currentCultureName = mapping.Key;
+                    break;
+                }
+            }
+
+
             var listOfTranslationFiles = GetLocalizationFilePaths();
             if(listOfTranslationFiles == null || !listOfTranslationFiles.Any())
             {
@@ -56,8 +87,8 @@ namespace SuperFishRemovalTool.Localization
 
             List<string> prioritizedLanguages = new List<string>()
             {
-                currentUiCulture.Name, // "en-US"
-                currentUiCulture.TwoLetterISOLanguageName, // "en"
+                currentCultureName, // "en-US"
+                currentCulture.TwoLetterISOLanguageName, // "en"
                 "en", // en is default
             };
 
