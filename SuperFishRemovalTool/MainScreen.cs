@@ -229,9 +229,8 @@ namespace SuperFishRemovalTool
                     }
 
                 }
-
-                string completeText = String.Format("{0} - {1}", text, result.NameOfItem);
-                this.ResultsFlowPanel.Controls.Add(GenerateResultLabel(completeText));
+                string completeText = String.Format("{0} - {1}", text, (null != result) ? result.NameOfItem : "null");
+                this.ResultsFlowPanel.Controls.Add(GenerateResultLabel(completeText, this.ResultsFlowPanel.Width));
 
             }
             catch (Exception ex)
@@ -465,8 +464,8 @@ namespace SuperFishRemovalTool
             {
                 if (e != null && e.Link != null)
                 {
-                    // Send the URL to the operating system.
-                    System.Diagnostics.Process.Start(e.Link.LinkData as string);
+                    string address = "\"" + e.Link.LinkData + "\""; // Wrap in quotes.  Otherwise explorer doesn't handle queries with numbers
+                    ProcessStarter.StartWithoutWindow("explorer.exe", address);
                 }
             }
             catch (Exception ex)
@@ -479,15 +478,32 @@ namespace SuperFishRemovalTool
         /// Creates a UI Label instance with the provided text
         /// </summary>
         /// <param name="text"></param>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        private static Label GenerateResultLabel(string text, int width)
+        {
+            return new Label()
+            {
+                Text = String.Format(text),
+                AutoSize = false,
+                Width = width, // not necessary, label stretches
+                Margin = new Padding(0),
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 10F),
+            };
+        }
+
+        /// <summary>
+        /// Creates a UI Label instance with the provided text
+        /// </summary>
+        /// <param name="text"></param>
         /// <returns></returns>
         private static Label GenerateResultLabel(string text)
         {
             return new Label()
             {
                 Text = String.Format(text),
-                AutoSize = false,
-                Width = 400,
-                Margin = new Padding(0, 3, 0, 2),
+                AutoSize = true,  // Width idsnot necessary, label wraps
+                Margin = new Padding(0, 4, 0, 4),
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 10F),
             };
         }

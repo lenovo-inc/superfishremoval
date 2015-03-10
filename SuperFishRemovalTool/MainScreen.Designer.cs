@@ -48,9 +48,9 @@
             // RemoveButton
             // 
             this.RemoveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RemoveButton.Location = new System.Drawing.Point(98, 117);
+            this.RemoveButton.Location = new System.Drawing.Point(132, 117);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(501, 52);
+            this.RemoveButton.Size = new System.Drawing.Size(536, 52);
             this.RemoveButton.TabIndex = 5;
             this.RemoveButton.Text = "AnalyzeAndRemoveSuperFish Now";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -59,9 +59,9 @@
             // AboutSuperfishLabel
             // 
             this.AboutSuperfishLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AboutSuperfishLabel.Location = new System.Drawing.Point(13, 13);
+            this.AboutSuperfishLabel.Location = new System.Drawing.Point(13, 4);
             this.AboutSuperfishLabel.Name = "AboutSuperfishLabel";
-            this.AboutSuperfishLabel.Size = new System.Drawing.Size(659, 46);
+            this.AboutSuperfishLabel.Size = new System.Drawing.Size(759, 52);
             this.AboutSuperfishLabel.TabIndex = 7;
             this.AboutSuperfishLabel.Text = "AboutSuperFish";
             // 
@@ -69,7 +69,7 @@
             // 
             this.MoreInfoLabel.AutoSize = true;
             this.MoreInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MoreInfoLabel.Location = new System.Drawing.Point(12, 485);
+            this.MoreInfoLabel.Location = new System.Drawing.Point(12, 508);
             this.MoreInfoLabel.Name = "MoreInfoLabel";
             this.MoreInfoLabel.Size = new System.Drawing.Size(107, 16);
             this.MoreInfoLabel.TabIndex = 8;
@@ -79,7 +79,7 @@
             // 
             this.ManualRemovalLinkLabel.AutoSize = true;
             this.ManualRemovalLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ManualRemovalLinkLabel.Location = new System.Drawing.Point(168, 486);
+            this.ManualRemovalLinkLabel.Location = new System.Drawing.Point(213, 508);
             this.ManualRemovalLinkLabel.Name = "ManualRemovalLinkLabel";
             this.ManualRemovalLinkLabel.Size = new System.Drawing.Size(173, 16);
             this.ManualRemovalLinkLabel.TabIndex = 9;
@@ -91,7 +91,7 @@
             // 
             this.SecurityAdvisoryLinkLabel.AutoSize = true;
             this.SecurityAdvisoryLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SecurityAdvisoryLinkLabel.Location = new System.Drawing.Point(423, 486);
+            this.SecurityAdvisoryLinkLabel.Location = new System.Drawing.Point(464, 508);
             this.SecurityAdvisoryLinkLabel.Name = "SecurityAdvisoryLinkLabel";
             this.SecurityAdvisoryLinkLabel.Size = new System.Drawing.Size(154, 16);
             this.SecurityAdvisoryLinkLabel.TabIndex = 11;
@@ -102,9 +102,9 @@
             // OverallResultLabel
             // 
             this.OverallResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OverallResultLabel.Location = new System.Drawing.Point(14, 375);
+            this.OverallResultLabel.Location = new System.Drawing.Point(14, 390);
             this.OverallResultLabel.Name = "OverallResultLabel";
-            this.OverallResultLabel.Size = new System.Drawing.Size(658, 37);
+            this.OverallResultLabel.Size = new System.Drawing.Size(758, 37);
             this.OverallResultLabel.TabIndex = 12;
             this.OverallResultLabel.Text = "AnalysisResult";
             // 
@@ -112,7 +112,7 @@
             // 
             this.LenovoStatementLinkLabel.AutoSize = true;
             this.LenovoStatementLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LenovoStatementLinkLabel.Location = new System.Drawing.Point(168, 510);
+            this.LenovoStatementLinkLabel.Location = new System.Drawing.Point(213, 532);
             this.LenovoStatementLinkLabel.Name = "LenovoStatementLinkLabel";
             this.LenovoStatementLinkLabel.Size = new System.Drawing.Size(113, 16);
             this.LenovoStatementLinkLabel.TabIndex = 13;
@@ -122,7 +122,7 @@
             // 
             // MainProgressBar
             // 
-            this.MainProgressBar.Location = new System.Drawing.Point(190, 175);
+            this.MainProgressBar.Location = new System.Drawing.Point(240, 169);
             this.MainProgressBar.MarqueeAnimationSpeed = 30;
             this.MainProgressBar.Name = "MainProgressBar";
             this.MainProgressBar.Size = new System.Drawing.Size(320, 34);
@@ -133,17 +133,17 @@
             // 
             this.ResultsFlowPanel.AutoScroll = true;
             this.ResultsFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.ResultsFlowPanel.Location = new System.Drawing.Point(131, 215);
+            this.ResultsFlowPanel.Location = new System.Drawing.Point(100, 209);
             this.ResultsFlowPanel.Name = "ResultsFlowPanel";
-            this.ResultsFlowPanel.Size = new System.Drawing.Size(448, 145);
+            this.ResultsFlowPanel.Size = new System.Drawing.Size(600, 178);
             this.ResultsFlowPanel.TabIndex = 15;
             // 
             // RestartNowButton
             // 
             this.RestartNowButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RestartNowButton.Location = new System.Drawing.Point(98, 422);
+            this.RestartNowButton.Location = new System.Drawing.Point(100, 445);
             this.RestartNowButton.Name = "RestartNowButton";
-            this.RestartNowButton.Size = new System.Drawing.Size(222, 52);
+            this.RestartNowButton.Size = new System.Drawing.Size(254, 52);
             this.RestartNowButton.TabIndex = 16;
             this.RestartNowButton.Text = "RestartNow";
             this.RestartNowButton.UseVisualStyleBackColor = true;
@@ -152,9 +152,9 @@
             // RestartLaterButton
             // 
             this.RestartLaterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RestartLaterButton.Location = new System.Drawing.Point(377, 422);
+            this.RestartLaterButton.Location = new System.Drawing.Point(446, 445);
             this.RestartLaterButton.Name = "RestartLaterButton";
-            this.RestartLaterButton.Size = new System.Drawing.Size(222, 52);
+            this.RestartLaterButton.Size = new System.Drawing.Size(254, 52);
             this.RestartLaterButton.TabIndex = 17;
             this.RestartLaterButton.Text = "RestartLater";
             this.RestartLaterButton.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@
             // 
             this.LicenseAgreementLinkLabel.AutoSize = true;
             this.LicenseAgreementLinkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LicenseAgreementLinkLabel.Location = new System.Drawing.Point(423, 510);
+            this.LicenseAgreementLinkLabel.Location = new System.Drawing.Point(464, 532);
             this.LicenseAgreementLinkLabel.Name = "LicenseAgreementLinkLabel";
             this.LicenseAgreementLinkLabel.Size = new System.Drawing.Size(166, 16);
             this.LicenseAgreementLinkLabel.TabIndex = 18;
@@ -176,7 +176,7 @@
             // 
             this.VersionLabel.AutoSize = true;
             this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VersionLabel.Location = new System.Drawing.Point(12, 510);
+            this.VersionLabel.Location = new System.Drawing.Point(12, 533);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(54, 16);
             this.VersionLabel.TabIndex = 19;
@@ -185,9 +185,9 @@
             // AboutThisToolLabel
             // 
             this.AboutThisToolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AboutThisToolLabel.Location = new System.Drawing.Point(13, 68);
+            this.AboutThisToolLabel.Location = new System.Drawing.Point(13, 56);
             this.AboutThisToolLabel.Name = "AboutThisToolLabel";
-            this.AboutThisToolLabel.Size = new System.Drawing.Size(659, 46);
+            this.AboutThisToolLabel.Size = new System.Drawing.Size(759, 58);
             this.AboutThisToolLabel.TabIndex = 20;
             this.AboutThisToolLabel.Text = "AboutThisTool";
             // 
@@ -195,7 +195,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 535);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.AboutThisToolLabel);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.LicenseAgreementLinkLabel);

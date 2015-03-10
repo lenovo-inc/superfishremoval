@@ -10,6 +10,7 @@ namespace SuperFishRemovalTool.Utilities
         public const string REGISTRY_KEY_DISPLAYNAME = "DisplayName";
         public const string REGISTRY_KEY_PUBLISHER = "Publisher";
         public const string REGISTRY_KEY_UNINSTALLSTRING = "Uninstallstring";
+        public const string REGISTRY_KEY_SUPERFISH_UNINSTALL = "Superfish Inc. VisualDiscovery";
 
         public string UtilityName { get { return Localization.LocalizationManager.Get().DetectorNameApp; } }
 
@@ -56,40 +57,63 @@ namespace SuperFishRemovalTool.Utilities
 
         private bool UninstallSuperfish(string AddRemoveRegistryKey)
         {
-            bool FoundInAddRemoveRegistry = false;
             bool AppRemoved = false;
+            bool FoundInAddRemoveRegistry = false;
+            bool TryManualRemove = true;  // Always try to manually remove superfish unless the uninstall finishes
 
-            string Uninstall = CheckAddRemoveRegistry(AddRemoveRegistryKey);
-            if (FoundInAddRemoveRegistry = ((!String.IsNullOrWhiteSpace(Uninstall))))
+            string Uninstall = null;
+            try
             {
                 // Try to stop/kill Superfish services and processes
                 StopAllSuperfishProcesses();
 
-                if (System.IO.File.Exists(Uninstall))
+                Uninstall = CheckAddRemoveRegistry(AddRemoveRegistryKey);
+
+                if (FoundInAddRemoveRegistry = ((!String.IsNullOrWhiteSpace(Uninstall))))
                 {
-                    AppRemoved = (0 == ProcessStarter.StartWithWindow(Uninstall, true));
-
-                    // Apparently the uninstall does NOT wait - it returns right away
-                    // So wait for the ProgramFiles directory to get removed
-                    string SuperfishDir = System.IO.Directory.GetParent(Uninstall).FullName;
-                    for (int i = 0; ((System.IO.Directory.Exists(SuperfishDir)) && (i < 60)); i++)
+                    if (System.IO.File.Exists(Uninstall))
                     {
-                        System.Threading.Thread.Sleep(500);
-                    }
+                        if (AppRemoved = (0 == ProcessStarter.StartWithWindow(Uninstall, true)))
+                        {
+                            // Apparently the uninstall does NOT wait - it returns right away
+                            // So wait (45 seconds) for the uninstall program to get removed
+                            for (int i = 0; ((System.IO.File.Exists(Uninstall)) && (i < 90)); i++)
+                            {
+                                System.Threading.Thread.Sleep(500);
+                            }
 
-                    if (AppRemoved && (!System.IO.Directory.Exists(SuperfishDir)))
-                    {
-                        Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish application removed");
+                            if (!System.IO.File.Exists(Uninstall))
+                            {
+                                // You know what... just ALWAYS also try the manual removal as well
+                                //TryManualRemove = false;
+                                Logging.Logger.Log(Logging.LogSeverity.Information, "  Superfish application uninstalled");
+                            }
+                        }
                     }
                 }
-                else
-                {
-                    // Since uninstall does not do it - Try to remove Superfish services
-                    RemoveAllSuperfishServices();
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Information, "Exception trying to run uninstall (try MANUAL removal) - " + ex.ToString());
+            }
+            
+            if (TryManualRemove)
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Information, "  Superfish application removal - " + AddRemoveRegistryKey);
 
-                    // Note: There may be some cases where the uninstall program doesn't exist anymore
-                    //       In this case - Make sure Add/Remove registry key is DELETED
-                    AppRemoved = (! String.IsNullOrWhiteSpace(CheckAddRemoveRegistry(AddRemoveRegistryKey, true)));
+                // Since uninstall may not do it - Try to remove Superfish services
+                RemoveAllSuperfishServices();
+
+                // Note: There may be some cases where the uninstall program doesn't exist anymore
+                //       In this case - Make sure Add/Remove registry key is DELETED
+                //
+                // Remember the ProgramFiles directory will get removed in "FilesDetector"
+                string DeleteAddRemoveKey = CheckAddRemoveRegistry(AddRemoveRegistryKey, true);
+
+                // Check to see if we should report something different in the UI
+                if ((! FoundInAddRemoveRegistry) || ((! String.IsNullOrWhiteSpace(Uninstall)) && (! System.IO.File.Exists(Uninstall))))
+                {
+                    AppRemoved = (!String.IsNullOrWhiteSpace(DeleteAddRemoveKey));
                 }
             }
 
@@ -153,7 +177,10 @@ namespace SuperFishRemovalTool.Utilities
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log(ex, "Exception in registry checking - " + ex.ToString());
+            }
             finally
             {
                 if (null != mainkey) mainkey.Close();
@@ -175,45 +202,59 @@ namespace SuperFishRemovalTool.Utilities
 
         public static void RemoveAllSuperfishServices()
         {
-            if (0 == ProcessStarter.StartWithoutWindow("sc", "delete VisualDiscovery", true))
+            try
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish service deleted");
-            }
-            // Not perfect - But give the service time to stop - just in case
-            System.Threading.Thread.Sleep(500);
+                if (0 == ProcessStarter.StartWithoutWindow("sc", "delete VisualDiscovery", true))
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish service deleted");
+                }
+                // Not perfect - But give the service time to stop - just in case
+                System.Threading.Thread.Sleep(500);
 
-            if (0 == ProcessStarter.StartWithoutWindow("sc", "delete VDWFP", true))
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "VisualDiscovery service deleted");
+                if (0 == ProcessStarter.StartWithoutWindow("sc", "delete VDWFP", true))
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "VisualDiscovery service deleted");
+                }
+                // Not perfect - But give the service time to stop - just in case
+                System.Threading.Thread.Sleep(500);
             }
-            // Not perfect - But give the service time to stop - just in case
-            System.Threading.Thread.Sleep(500);
+            catch (Exception ex)
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Error, "Exception trying to remove Superfish processes - " + ex.ToString());
+            }
         }
 
         public static bool StopAllSuperfishProcesses()
         {
             bool KilledProcess = false;
 
-            if (0 == ProcessStarter.StartWithoutWindow("sc", "stop VisualDiscovery", true))
+            try
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish service stopped");
-            }
-            // Not perfect - But give the service time to stop - just in case
-            System.Threading.Thread.Sleep(500);
+                if (0 == ProcessStarter.StartWithoutWindow("sc", "stop VisualDiscovery", true))
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish service stopped");
+                }
+                // Not perfect - But give the service time to stop - just in case
+                System.Threading.Thread.Sleep(500);
 
-            if (0 == ProcessStarter.StartWithoutWindow("sc", "stop VDWFP", true))
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "VisualDiscovery service stopped");
-            }
-            // Not perfect - But give the service time to stop - just in case
-            System.Threading.Thread.Sleep(500);
+                if (0 == ProcessStarter.StartWithoutWindow("sc", "stop VDWFP", true))
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "VisualDiscovery service stopped");
+                }
+                // Not perfect - But give the service time to stop - just in case
+                System.Threading.Thread.Sleep(500);
 
-            if (KilledProcess = KillVisualDiscoveryProcess())
-            {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish processed stopped");
+                if (KilledProcess = KillVisualDiscoveryProcess())
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish processed stopped");
+                }
+                // Not perfect - But give the process time to stop - just in case
+                System.Threading.Thread.Sleep(500);
             }
-            // Not perfect - But give the process time to stop - just in case
-            System.Threading.Thread.Sleep(500);
+            catch (Exception ex)
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Error, "Exception trying to stop Superfish processes - " + ex.ToString());
+            }
 
             return KilledProcess;
         }

@@ -38,8 +38,7 @@ namespace SuperFishRemovalTool.Utilities
 
             if (CheckSoftwareRegistry(REGISTRY_KEY_UNINSTALL32))
             {
-                RegistryKey32Removed = DeleteSoftwareRegistry("SOFTWARE\\Wow6432Node");
-                if (RegistryKey32Removed)
+                if (RegistryKey32Removed = DeleteSoftwareRegistry("SOFTWARE\\Wow6432Node"))
                 {
                     Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key removed: HKLM\\SOFTWARE\\Wow6432Node\\VisualDiscovery");
                 }
@@ -47,17 +46,32 @@ namespace SuperFishRemovalTool.Utilities
 
             if (CheckSoftwareRegistry(REGISTRY_KEY_UNINSTALL))
             {
-                RegistryKey64Removed = DeleteSoftwareRegistry("SOFTWARE");
-                if (RegistryKey64Removed)
+                if (RegistryKey64Removed = DeleteSoftwareRegistry("SOFTWARE"))
                 {
                     Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key removed: HKLM\\SOFTWARE\\VisualDiscovery");
+                }
+            }
+
+            // Just a double-check - remove the add/remove key from the registry too
+            if (CheckSoftwareRegistry(ApplicationUtility.REGISTRY_KEY_UNINSTALL_WOW + "\\" + ApplicationUtility.REGISTRY_KEY_SUPERFISH_UNINSTALL))
+            {
+                if (DeleteSoftwareRegistry(ApplicationUtility.REGISTRY_KEY_UNINSTALL_WOW, ApplicationUtility.REGISTRY_KEY_SUPERFISH_UNINSTALL))
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key removed: " + ApplicationUtility.REGISTRY_KEY_UNINSTALL_WOW + "\\" + ApplicationUtility.REGISTRY_KEY_SUPERFISH_UNINSTALL);
+                }
+            }
+            if (CheckSoftwareRegistry(ApplicationUtility.REGISTRY_KEY_UNINSTALL + "\\" + ApplicationUtility.REGISTRY_KEY_SUPERFISH_UNINSTALL))
+            {
+                if (DeleteSoftwareRegistry(ApplicationUtility.REGISTRY_KEY_UNINSTALL, ApplicationUtility.REGISTRY_KEY_SUPERFISH_UNINSTALL))
+                {
+                    Logging.Logger.Log(Logging.LogSeverity.Information, "Superfish registry key removed: " + ApplicationUtility.REGISTRY_KEY_UNINSTALL + "\\" + ApplicationUtility.REGISTRY_KEY_SUPERFISH_UNINSTALL);
                 }
             }
 
             return RegistryKey32Removed || RegistryKey64Removed;
         }
 
-        private bool DeleteSoftwareRegistry(string uninstall_key)
+        private bool DeleteSoftwareRegistry(string uninstall_key, string keyname = null)
         {
             bool SoftwareKeyDeleted = false;
 
@@ -68,7 +82,15 @@ namespace SuperFishRemovalTool.Utilities
                 {
                     try
                     {
-                        mainkey.DeleteSubKey("VisualDiscovery");
+                        if (String.IsNullOrWhiteSpace(keyname))
+                        {
+                            mainkey.DeleteSubKey("VisualDiscovery");
+                        }
+                        else
+                        {
+                            mainkey.DeleteSubKey(keyname);
+                        }
+
                         SoftwareKeyDeleted = true;
                     }
                     catch { }

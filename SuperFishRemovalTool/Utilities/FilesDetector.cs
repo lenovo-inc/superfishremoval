@@ -135,18 +135,40 @@ namespace SuperFishRemovalTool.Utilities
             List<string> AllFiles = new List<string>();
 
             // Check %ProgramFile% directories first
-            string SuperfishProgramFilesDirX86 = System.IO.Path.Combine(GetProgramFilesX86(), "Lenovo\\VisualDiscovery");
-            if (System.IO.Directory.Exists(SuperfishProgramFilesDirX86))
+            try
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish directory: " + SuperfishProgramFilesDirX86);
-                AllFiles.Add(SuperfishProgramFilesDirX86);
+                string programfilesx86 = GetProgramFilesX86();
+                if (null != programfilesx86)
+                {
+                    string SuperfishProgramFilesDirX86 = System.IO.Path.Combine(programfilesx86, "Lenovo\\VisualDiscovery");
+                    if (System.IO.Directory.Exists(SuperfishProgramFilesDirX86))
+                    {
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish directory: " + SuperfishProgramFilesDirX86);
+                        AllFiles.Add(SuperfishProgramFilesDirX86);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Error, "Problem detecting ProgramFilesX86 - " + ex.ToString());
             }
 
-            string SuperfishProgramFilesDir = System.IO.Path.Combine(GetProgramFiles(), "Lenovo\\VisualDiscovery");
-            if (System.IO.Directory.Exists(SuperfishProgramFilesDir))
+            try
             {
-                Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish directory: " + SuperfishProgramFilesDir);
-                AllFiles.Add(SuperfishProgramFilesDir);
+                string programfiles = GetProgramFiles();
+                if (null != programfiles)
+                {
+                    string SuperfishProgramFilesDir = System.IO.Path.Combine(programfiles, "Lenovo\\VisualDiscovery");
+                    if (System.IO.Directory.Exists(SuperfishProgramFilesDir))
+                    {
+                        Logging.Logger.Log(Logging.LogSeverity.Information, "Found Superfish directory: " + SuperfishProgramFilesDir);
+                        AllFiles.Add(SuperfishProgramFilesDir);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log(Logging.LogSeverity.Error, "Problem detecting ProgramFiles - " + ex.ToString());
             }
 
             string[] SystemFiles = null;
@@ -265,19 +287,32 @@ namespace SuperFishRemovalTool.Utilities
         private string GetProgramFilesX86()
         {
             string dir = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            if (! System.IO.Directory.Exists(dir))
+
+            //if (! System.IO.Directory.Exists(dir))
+            //{
+            //    dir = Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+            //}
+
+            if (String.IsNullOrWhiteSpace(dir))
             {
-                dir = Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-            }
+                dir = GetProgramFiles();
+            }            
 
             return dir;
         }
+
         private string GetProgramFiles()
         {
             string dir = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            if (! System.IO.Directory.Exists(dir))
+
+            //if (! System.IO.Directory.Exists(dir))
+            //{
+            //    dir = Environment.GetEnvironmentVariable("ProgramFiles");
+            //}
+
+            if (String.IsNullOrWhiteSpace(dir))
             {
-                dir = Environment.GetEnvironmentVariable("ProgramFiles");
+                dir = null;
             }
 
             return dir;

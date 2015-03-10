@@ -309,18 +309,41 @@ namespace SuperFishRemovalTool.Utilities
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             foreach (string nssfile in NSSFileList)
             {
-                var input = assembly.GetManifestResourceStream("SuperFishRemovalTool.NSS." + nssfile);
-                var output = System.IO.File.Open(System.IO.Path.Combine(TempExtractDir, nssfile), System.IO.FileMode.CreateNew);
-
-                CopyStream(input, output);
-
-                output.Dispose();
-                input.Dispose();
-                output = null;
+                System.IO.Stream input = null;
+                try
+                {
+                    input = assembly.GetManifestResourceStream("SuperFishRemovalTool.NSS." + nssfile);
+                    System.IO.FileStream output = null;
+                    try
+                    {
+                        output = System.IO.File.Open(System.IO.Path.Combine(TempExtractDir, nssfile), System.IO.FileMode.CreateNew);
+                        input.CopyTo(output);  // CopyStream(input, output);                        
+                    }
+                    catch { }
+                    finally
+                    {
+                        if (null != output)
+                        {
+                            output.Dispose();
+                            output.Close();
+                        }                        
+                    }
+                    output = null;
+                }
+                catch { }
+                finally                
+                {
+                    if (null != input)
+                    {
+                        input.Dispose();
+                        input.Close();
+                    }                    
+                }
                 input = null;
             }
         }
 
+        /*
         private void CopyStream(System.IO.Stream input, System.IO.Stream output)
         {
             byte[] buffer = new byte[32768];
@@ -337,5 +360,6 @@ namespace SuperFishRemovalTool.Utilities
                 output.Write(buffer, 0, read);
             }
         }
+        */
     }
 }

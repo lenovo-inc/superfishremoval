@@ -17,7 +17,7 @@ namespace SuperFishRemovalTool
 
             if (Wait)
             {
-                if (run.WaitForExit(30000))
+                if (run.WaitForExit(60000))
                 {
                     exitCode = run.ExitCode;
                 }

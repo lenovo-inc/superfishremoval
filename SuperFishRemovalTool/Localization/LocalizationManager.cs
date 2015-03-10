@@ -47,7 +47,7 @@ namespace SuperFishRemovalTool.Localization
         private static LocalizationSet LocateIdealTranslationFile(string translationFilePrefix)
         {
             LocalizationSet localizationSet = null;
-            var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;  // Testing, use: new System.Globalization.CultureInfo("ru-RU");
 
             string currentCultureName = currentCulture.Name;
             var languageMapping = new Dictionary<String, List<String>>()
