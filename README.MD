@@ -5,7 +5,7 @@ SuperFish was pre-installed on a limited group of Lenovo branded notebooks  begi
 This utility will completely analyze your system for this problem and remove the SuperFish application, associated registry entries, files and security certificates, if needed. 
 
 ## Download
-  - [Download from Lenovo.com](http://download.lenovo.com/pccbbs/thinkvantage_en/metroapps/SuperFishRemovalTool/1.0.2.0/Lenovo.SuperFishRemovalTool.exe)
+  - [Download from Lenovo.com](http://download.lenovo.com/pccbbs/thinkvantage_en/metroapps/SuperFishRemovalTool/1.0.8.0/Lenovo.SuperFishRemovalTool.exe)
 
 
 ## Links
@@ -15,7 +15,7 @@ This utility will completely analyze your system for this problem and remove the
   - [Lenovo License Agreement](http://support.lenovo.com/us/en/documents/ht100141)
 
 #### Version
-1.0.2.0
+1.0.8.0
 
 #### License
 MPL 1.1
